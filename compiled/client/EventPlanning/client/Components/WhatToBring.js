@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -18,16 +18,58 @@ var WhatToBring = function (_React$Component) {
   }
 
   _createClass(WhatToBring, [{
-    key: "render",
+    key: 'fetchTable',
+    value: function fetchTable() {
+      console.log('hit fetchtable');
+    }
+  }, {
+    key: 'render',
     value: function render() {
+      this.fetchTable();
       return React.createElement(
-        "div",
+        'div',
         null,
-        "What To Bring Page Here"
+        'What To Bring Page Here',
+        React.createElement(
+          'table',
+          null,
+          React.createElement(
+            'thead',
+            null,
+            React.createElement(
+              'tr',
+              null,
+              React.createElement(
+                'th',
+                null,
+                'Item'
+              ),
+              React.createElement(
+                'th',
+                null,
+                'Cost'
+              ),
+              React.createElement(
+                'th',
+                null,
+                'Owner'
+              )
+            )
+          ),
+          React.createElement(
+            'tbody',
+            null,
+            React.createElement(
+              'tr',
+              null,
+              React.createElement('th', null)
+            )
+          )
+        )
       );
     }
   }]);
 
   return WhatToBring;
 }(React.Component);
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL2NsaWVudC9FdmVudFBsYW5uaW5nL2NsaWVudC9Db21wb25lbnRzL1doYXRUb0JyaW5nLmpzeCJdLCJuYW1lcyI6WyJXaGF0VG9CcmluZyIsInByb3BzIiwiUmVhY3QiLCJDb21wb25lbnQiXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7SUFBTUEsVzs7O0FBQ0osdUJBQVlDLEtBQVosRUFBbUI7QUFBQTs7QUFBQSxxSEFDWEEsS0FEVztBQUVsQjs7Ozs2QkFFUTtBQUNQLGFBQVE7QUFBQTtBQUFBO0FBQUE7QUFBQSxPQUFSO0FBQ0Q7Ozs7RUFQdUJDLE1BQU1DLFMiLCJmaWxlIjoiV2hhdFRvQnJpbmcuanMiLCJzb3VyY2VzQ29udGVudCI6WyJjbGFzcyBXaGF0VG9CcmluZyBleHRlbmRzIFJlYWN0LkNvbXBvbmVudCB7XG4gIGNvbnN0cnVjdG9yKHByb3BzKSB7XG4gICAgc3VwZXIocHJvcHMpO1xuICB9XG5cbiAgcmVuZGVyKCkge1xuICAgIHJldHVybiAoPGRpdj5XaGF0IFRvIEJyaW5nIFBhZ2UgSGVyZTwvZGl2PilcbiAgfVxufSJdfQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL2NsaWVudC9FdmVudFBsYW5uaW5nL2NsaWVudC9Db21wb25lbnRzL1doYXRUb0JyaW5nLmpzeCJdLCJuYW1lcyI6WyJXaGF0VG9CcmluZyIsInByb3BzIiwiY29uc29sZSIsImxvZyIsImZldGNoVGFibGUiLCJSZWFjdCIsIkNvbXBvbmVudCJdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7OztJQUFNQSxXOzs7QUFDSix1QkFBWUMsS0FBWixFQUFtQjtBQUFBOztBQUFBLHFIQUNYQSxLQURXO0FBRWxCOzs7O2lDQUVZO0FBQ1hDLGNBQVFDLEdBQVIsQ0FBWSxnQkFBWjtBQUNEOzs7NkJBRVE7QUFDUCxXQUFLQyxVQUFMO0FBQ0EsYUFBUTtBQUFBO0FBQUE7QUFBQTtBQUVFO0FBQUE7QUFBQTtBQUNFO0FBQUE7QUFBQTtBQUNFO0FBQUE7QUFBQTtBQUNFO0FBQUE7QUFBQTtBQUFBO0FBQUEsZUFERjtBQUVFO0FBQUE7QUFBQTtBQUFBO0FBQUEsZUFGRjtBQUdFO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFIRjtBQURGLFdBREY7QUFRRTtBQUFBO0FBQUE7QUFDRTtBQUFBO0FBQUE7QUFDRTtBQURGO0FBREY7QUFSRjtBQUZGLE9BQVI7QUFpQkQ7Ozs7RUE1QnVCQyxNQUFNQyxTIiwiZmlsZSI6IldoYXRUb0JyaW5nLmpzIiwic291cmNlc0NvbnRlbnQiOlsiY2xhc3MgV2hhdFRvQnJpbmcgZXh0ZW5kcyBSZWFjdC5Db21wb25lbnQge1xuICBjb25zdHJ1Y3Rvcihwcm9wcykge1xuICAgIHN1cGVyKHByb3BzKTtcbiAgfVxuXG4gIGZldGNoVGFibGUoKSB7XG4gICAgY29uc29sZS5sb2coJ2hpdCBmZXRjaHRhYmxlJyk7XG4gIH1cblxuICByZW5kZXIoKSB7XG4gICAgdGhpcy5mZXRjaFRhYmxlKCk7XG4gICAgcmV0dXJuICg8ZGl2PldoYXQgVG8gQnJpbmcgUGFnZSBIZXJlXG5cbiAgICAgICAgICAgICAgPHRhYmxlPlxuICAgICAgICAgICAgICAgIDx0aGVhZD5cbiAgICAgICAgICAgICAgICAgIDx0cj5cbiAgICAgICAgICAgICAgICAgICAgPHRoPkl0ZW08L3RoPlxuICAgICAgICAgICAgICAgICAgICA8dGg+Q29zdDwvdGg+XG4gICAgICAgICAgICAgICAgICAgIDx0aD5Pd25lcjwvdGg+XG4gICAgICAgICAgICAgICAgICA8L3RyPlxuICAgICAgICAgICAgICAgIDwvdGhlYWQ+XG4gICAgICAgICAgICAgICAgPHRib2R5PlxuICAgICAgICAgICAgICAgICAgPHRyPlxuICAgICAgICAgICAgICAgICAgICA8dGg+e308L3RoPlxuICAgICAgICAgICAgICAgICAgPC90cj5cbiAgICAgICAgICAgICAgICA8L3Rib2R5PlxuICAgICAgICAgICAgICA8L3RhYmxlPlxuICAgICAgICAgICAgPC9kaXY+KVxuICB9XG59Il19

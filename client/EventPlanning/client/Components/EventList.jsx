@@ -1,4 +1,4 @@
-class App extends React.Component {
+class EventList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -24,5 +24,5 @@ class App extends React.Component {
             </div>);
   }
 }
-window.App = App;
+window.EventList = EventList;
 
