@@ -1,4 +1,4 @@
 ReactDOM.render(
-  <App eventData={eventData}/>, 
+  <App />, 
   document.getElementById('HomepageApp') 
 );
