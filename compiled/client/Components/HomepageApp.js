@@ -1,0 +1,13 @@
+"use strict";
+
+var App = function App(props) {
+  return React.createElement(
+    "div",
+    null,
+    React.createElement(Nav, null),
+    React.createElement(EventList, { eventData: props.eventData })
+  );
+};
+
+window.App = App;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uL2NsaWVudC9Db21wb25lbnRzL0hvbWVwYWdlQXBwLmpzeCJdLCJuYW1lcyI6WyJBcHAiLCJwcm9wcyIsImV2ZW50RGF0YSIsIndpbmRvdyJdLCJtYXBwaW5ncyI6Ijs7QUFBQSxJQUFJQSxNQUFNLFNBQU5BLEdBQU0sQ0FBQ0MsS0FBRCxFQUFXO0FBQ25CLFNBQ0U7QUFBQTtBQUFBO0FBQ0Usd0JBQUMsR0FBRCxPQURGO0FBRUUsd0JBQUMsU0FBRCxJQUFXLFdBQVdBLE1BQU1DLFNBQTVCO0FBRkYsR0FERjtBQU1ELENBUEQ7O0FBVUFDLE9BQU9ILEdBQVAsR0FBYUEsR0FBYiIsImZpbGUiOiJIb21lcGFnZUFwcC5qcyIsInNvdXJjZXNDb250ZW50IjpbInZhciBBcHAgPSAocHJvcHMpID0+IHtcbiAgcmV0dXJuIChcbiAgICA8ZGl2PlxuICAgICAgPE5hdiAvPlxuICAgICAgPEV2ZW50TGlzdCBldmVudERhdGE9e3Byb3BzLmV2ZW50RGF0YX0vPlxuICAgIDwvZGl2PlxuICApO1xufTsgIFxuXG5cbndpbmRvdy5BcHAgPSBBcHA7Il19

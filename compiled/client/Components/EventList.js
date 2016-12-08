@@ -1,0 +1,14 @@
+"use strict";
+
+var EventList = function EventList(props) {
+  return React.createElement(
+    "div",
+    null,
+    props.eventData.map(function (event) {
+      return React.createElement(EventListEntry, { event: event, key: event.ID });
+    })
+  );
+};
+
+window.EventList = EventList;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uL2NsaWVudC9Db21wb25lbnRzL0V2ZW50TGlzdC5qc3giXSwibmFtZXMiOlsiRXZlbnRMaXN0IiwicHJvcHMiLCJldmVudERhdGEiLCJtYXAiLCJldmVudCIsIklEIiwid2luZG93Il0sIm1hcHBpbmdzIjoiOztBQUFBLElBQUlBLFlBQVksU0FBWkEsU0FBWSxDQUFDQyxLQUFEO0FBQUEsU0FDZDtBQUFBO0FBQUE7QUFDR0EsVUFBTUMsU0FBTixDQUFnQkMsR0FBaEIsQ0FBb0IsVUFBQ0MsS0FBRDtBQUFBLGFBQ25CLG9CQUFDLGNBQUQsSUFBZ0IsT0FBT0EsS0FBdkIsRUFBOEIsS0FBS0EsTUFBTUMsRUFBekMsR0FEbUI7QUFBQSxLQUFwQjtBQURILEdBRGM7QUFBQSxDQUFoQjs7QUFRQUMsT0FBT04sU0FBUCxHQUFtQkEsU0FBbkIiLCJmaWxlIjoiRXZlbnRMaXN0LmpzIiwic291cmNlc0NvbnRlbnQiOlsidmFyIEV2ZW50TGlzdCA9IChwcm9wcykgPT4gKFxuICA8ZGl2PlxuICAgIHtwcm9wcy5ldmVudERhdGEubWFwKChldmVudCkgPT4gXG4gICAgICA8RXZlbnRMaXN0RW50cnkgZXZlbnQ9e2V2ZW50fSBrZXk9e2V2ZW50LklEfS8+XG4gICAgKX1cbiAgPC9kaXY+XG4pO1xuXG53aW5kb3cuRXZlbnRMaXN0ID0gRXZlbnRMaXN0OyJdfQ==
