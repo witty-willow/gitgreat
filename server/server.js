@@ -1,43 +1,59 @@
-var express = require('express');
-var path = require('path');
-var parser = require('body-parser');
-var db = require('../db');
+const express = require('express');
+const path = require('path');
+const parser = require('body-parser');
+const db = require('../db');
 
 
-var app = express();
+const app = express();
 
 app.use(parser.json());
-
-var newEvent = path.join(__dirname, '../db/event.js')
-var itemList = path.join(__dirname, '../db/itemlist.js')
+app.use(express.static('public'));
 
 
+// Links to database controllers
+const newEvent = path.join(__dirname, '../db/event.js');
+const itemList = path.join(__dirname, '../db/itemlist.js');
+
+// Adds events from eventTable to database, using database method 'eventTable'
 app.post('/eventTable', function(req, res, next) {
-  newEvent.Event(req)
-  .then(function(resp) {
-    console.log('Added Event: ', resp);
-  })
-})
+  newEvent.EventTable
+    .create({name: 'Tim',//JSON.stringify(req.body.name),
+            where: 'Hotpot',//JSON.stringify(req.body.where),
+            when: '8PM'})//JSON.stringify(req.body.when)})
+    .save()
+    .then(function(event) {
+      console.log(event);
+    })
+    .catch(function(err) {
+      console.log('Error: ', err);
+    })
+}); 
 app.get('/eventTable', function(req, res, next) {
   newEvent.getAll()
-  .then(function(resp)) {
+  .then(function(resp) {
     console.log('Got Events: ', resp);
-  }
-})
+  });
+});
 
 
 app.post('/itemList', function(req, res, next) {
-  itemList.Item(req)
-  .then(function(resp) {
-    console.log('Added Item: ', resp);
-  })
-})
+  itemList.ItemListTable
+    .create({item: JSON.stringify(req.body.item),
+             owner: JSON.stringify(req.body.owner),
+             cost: JSON.stringify(req.body.cost)})
+    .save()
+    .then(function(item) {
+      console.log(item)
+    }).catch(function(err) {
+      console.log('Error: ', err);
+    })
+});
 app.get('/itemList', function(req, res, next) {
   itemList.getAll()
   .then(function(resp) {
     console.log('Got Items: ', resp);
   })
-})
+});
 
 
 app.listen(3000, function() {
@@ -45,3 +61,4 @@ app.listen(3000, function() {
 })
 
 module.exports = app;
+
