@@ -1,4 +1,3 @@
-
 'use strict';
 
 var Nav = function Nav() {

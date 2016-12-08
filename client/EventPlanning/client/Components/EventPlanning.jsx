@@ -1,4 +1,4 @@
-class EventList extends React.Component {
+class EventPlanning extends React.Component {
   constructor(props) {
     super(props);
     this.state = {

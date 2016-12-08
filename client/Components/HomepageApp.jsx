@@ -5,7 +5,7 @@
 //       <EventList eventData={props.eventData}/>
 //     </div>
 //   );
-// };  
+// };
 
 class App extends React.Component {
   constructor(props) {
@@ -21,7 +21,7 @@ class App extends React.Component {
 
   handleEntryClick(event) {
     this.setState({
-      page: 'eventDetails', 
+      page: 'eventDetails',
       featuredEvent: event,
       test: 'test'
     });
@@ -30,14 +30,14 @@ class App extends React.Component {
   render() {
     var button;
     if (this.state.page === 'homepage') {
-      button = <EventList 
+      button = <EventList
           eventData={this.state.eventList}
           handleEntryClick={this.handleEntryClick}
         />;
     } else if (this.state.page === 'eventDetails') {
-      button = <h1>Event details</h1>;
+      button = <EventPlanning featuredEvent={this.state.featuredEvent}/>;
     }
-    
+
     return (
       <div>
         <Nav />
