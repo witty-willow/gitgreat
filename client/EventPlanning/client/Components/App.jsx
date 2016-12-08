@@ -6,10 +6,11 @@ class App extends React.Component {
     }
   }
 
-  changeDisplay() {
-    console.log('hit');
+  changeDisplay(e) {
+    // console.log('hit');
+    // console.log('e here:', e.target.value);
     this.setState({
-      tab: true
+      tab: e.target.value
     });
   }
 
@@ -17,7 +18,8 @@ class App extends React.Component {
     return (<div>
               <h1>EVENT</h1>
               <div>Display Tab Below Stuff Here</div>
-              {this.state.tab ? <WhatToBring /> : null}
+              {this.state.tab === 'whatToBringBtn' ? <WhatToBring /> : null}
+              {this.state.tab === 'activitiesBtn' ? <Activities /> : null}
               <FeatureNavigation changeDisplay={this.changeDisplay.bind(this)} />
             </div>);
   }
