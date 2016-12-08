@@ -1,4 +1,4 @@
-"use strict";
+
 
 var EventListEntry = function EventListEntry(props) {
   return React.createElement(

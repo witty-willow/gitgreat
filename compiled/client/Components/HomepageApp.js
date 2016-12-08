@@ -15,7 +15,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 //       <EventList eventData={props.eventData}/>
 //     </div>
 //   );
-// };  
+// };
 
 var App = function (_React$Component) {
   _inherits(App, _React$Component);
