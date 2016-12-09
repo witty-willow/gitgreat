@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const parser = require('body-parser');
 const db = require('../db');
-
+const EventTable = require('../db/index.js');
 //
 
 const app = express();
@@ -12,15 +12,17 @@ app.use(express.static('public'));
 
 
 // Links to database controllers
-const newEvent = path.join(__dirname, '../db/event.js');
-const itemList = path.join(__dirname, '../db/itemlist.js');
+// const newEvent = path.join(__dirname, '../db/event.js');
+// const itemList = path.join(__dirname, '../db/itemlist.js');
+
+const dbModels = require('../db/index.js');
 
 // Adds events from eventTable to database, using database method 'eventTable'
 app.post('/eventTable', function(req, res, next) {
-  newEvent.EventTable
-    .create({name: 'Tim',//JSON.stringify(req.body.name),
-            where: 'Hotpot',//JSON.stringify(req.body.where),
-            when: '8PM'})//JSON.stringify(req.body.when)})
+  dbModels.EventTable
+    .create({name: JSON.stringify(req.body.name),
+            where: JSON.stringify(req.body.where),
+            when: JSON.stringify(req.body.when)})
     .save()
     .then(function(event) {
       console.log(event);
@@ -29,16 +31,16 @@ app.post('/eventTable', function(req, res, next) {
       console.log('Error: ', err);
     })
 }); 
+
 app.get('/eventTable', function(req, res, next) {
-  newEvent.getAll()
+  dbModels.EventTable.getAll()
   .then(function(resp) {
     console.log('Got Events: ', resp);
   });
 });
 
-
 app.post('/itemList', function(req, res, next) {
-  itemList.ItemListTable
+  dbModels.ItemListTable
     .create({item: JSON.stringify(req.body.item),
              owner: JSON.stringify(req.body.owner),
              cost: JSON.stringify(req.body.cost)})
@@ -50,7 +52,7 @@ app.post('/itemList', function(req, res, next) {
     })
 });
 app.get('/itemList', function(req, res, next) {
-  itemList.getAll()
+  dbModels.ItemListTable.getAll()
   .then(function(resp) {
     console.log('Got Items: ', resp);
   })
@@ -62,4 +64,17 @@ app.listen(3000, function() {
 })
 
 module.exports = app;
+
+  // dbModels.EventTable
+  //   .create({name: 'Tim',//JSON.stringify(req.body.name),
+  //           where: 'Hotpot',//JSON.stringify(req.body.where),
+  //           when: '8PM'})//JSON.stringify(req.body.when)})
+  //   .then(function(event) {
+  //     console.log('event!!!!!!!!!', event);
+  //   })
+  //   .catch(function(err) {
+  //     console.log('Hotpot Error: ', err);
+  //   })
+
+
 

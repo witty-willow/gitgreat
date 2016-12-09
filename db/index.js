@@ -1,12 +1,17 @@
 var Sequelize = require('sequelize');
-// var Event = require('./models/event.js');
-// var ItemList = require('./models/itemlist.js');
+var mysql = require('mysql');
 
+mysql.createConnection({
+  user: root,
+  password: null,
+  database: 'gitgreat'
+});
 
-var sequelize = new Sequelize('database', 'username', null, 
-  { dialect: 'sqlite', storage: './db.sqlite' });
+var sequelize = new Sequelize('gitgreat', 'root', '', {
+  host: 'localhost', dialect: 'mysql'
+});
 
-var EventTable = Sequelize.define('event', {
+var EventTable = sequelize.define('events', {
   name: {
     type: Sequelize.STRING
   },
@@ -18,7 +23,7 @@ var EventTable = Sequelize.define('event', {
   }
 });
 
-var ItemListTable = sequelize.define('itemlist', {
+var ItemListTable = sequelize.define('itemlists', {
   item: {
     type: Sequelize.STRING
   },
@@ -40,5 +45,5 @@ sequelize
     console.log('Unable to connect to the database:', err);
   });
 
-module.exports = EventTable;
-module.exports = ItemListTable;
+module.exports.EventTable = EventTable;
+module.exports.ItemListTable = ItemListTable;    
