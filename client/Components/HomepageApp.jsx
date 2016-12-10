@@ -13,8 +13,7 @@ class App extends React.Component {
     this.state = {
       eventList: eventData,
       page: 'homepage',
-      featuredEvent: null,
-      test: null
+      featuredEvent: null
     };
     this.handleEntryClick = this.handleEntryClick.bind(this);
   }
@@ -22,26 +21,25 @@ class App extends React.Component {
   handleEntryClick(event) {
     this.setState({
       page: 'eventDetails',
-      featuredEvent: event,
-      test: 'test'
+      featuredEvent: event
     });
   }
 
   render() {
-    var button;
+    var view;
     if (this.state.page === 'homepage') {
-      button = <EventList
+      view = <EventList
           eventData={this.state.eventList}
           handleEntryClick={this.handleEntryClick}
-        />;
+      />;
     } else if (this.state.page === 'eventDetails') {
-      button = <EventPlanning featuredEvent={this.state.featuredEvent}/>;
+      view = <EventPlanning featuredEvent={this.state.featuredEvent}/>;
     }
 
     return (
       <div>
         <Nav />
-        {button}
+        {view}
       </div>
     );
   }
