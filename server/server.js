@@ -65,16 +65,16 @@ app.listen(3000, function() {
 
 module.exports = app;
 
-  // dbModels.EventTable
-  //   .create({name: 'Tim',//JSON.stringify(req.body.name),
-  //           where: 'Hotpot',//JSON.stringify(req.body.where),
-  //           when: '8PM'})//JSON.stringify(req.body.when)})
-  //   .then(function(event) {
-  //     console.log('event!!!!!!!!!', event);
-  //   })
-  //   .catch(function(err) {
-  //     console.log('Hotpot Error: ', err);
-  //   })
+// dbModels.EventTable
+//   .create({name: 'Tim',//JSON.stringify(req.body.name),
+//           where: 'Hotpot',//JSON.stringify(req.body.where),
+//           when: '8PM'})//JSON.stringify(req.body.when)})
+//   .then(function(event) {
+//     console.log('event!!!!!!!!!', event);
+//   })
+//   .catch(function(err) {
+//     console.log('Hotpot Error: ', err);
+//   })
 
 
 
