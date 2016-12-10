@@ -5,12 +5,12 @@ USE gitgreat;
 DROP TABLE IF EXISTS `events`;
     
 CREATE TABLE `events` (
-  `id` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
-  `name` VARCHAR(60) NULL DEFAULT NULL,
-  `where` VARCHAR(60) NULL DEFAULT NULL,
-  `when` VARCHAR(60) NULL DEFAULT NULL,
-  `createdAt` VARCHAR(60) NULL DEFAULT NULL,
-  `updatedAt` VARCHAR(60) NULL DEFAULT NULL,
+  `id` INTEGER AUTO_INCREMENT,
+  `name` VARCHAR(60),
+  `where` VARCHAR(60),
+  `when` VARCHAR(60),
+  `createdAt` VARCHAR(60),
+  `updatedAt` VARCHAR(60),
   PRIMARY KEY (`id`)
 );
 
@@ -22,13 +22,13 @@ CREATE TABLE `events` (
 DROP TABLE IF EXISTS `itemlists`;
     
 CREATE TABLE `itemlists` (
-  `id` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
-  `item` VARCHAR(60) NULL DEFAULT NULL,
-  `owner` VARCHAR(60) NULL DEFAULT NULL,
-  `cost` VARCHAR(60) NULL DEFAULT NULL,
-  `event` INTEGER NULL DEFAULT NULL,
-  `createdAt` VARCHAR(60) NULL DEFAULT NULL,
-  `updatedAt` VARCHAR(60) NULL DEFAULT NULL,
+  `id` INTEGER AUTO_INCREMENT,
+  `item` VARCHAR(60),
+  `owner` VARCHAR(60),
+  `cost` VARCHAR(60),
+  `event` INTEGER,
+  `createdAt` VARCHAR(60),
+  `updatedAt` VARCHAR(60),
   PRIMARY KEY (`id`)
 );
 
