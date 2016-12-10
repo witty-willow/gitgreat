@@ -3,26 +3,32 @@ class EventPlanning extends React.Component {
     super(props);
     this.state = {
       tab: false
-    }
+    };
+
+    this.changeDisplay = this.changeDisplay.bind(this);
   }
 
   changeDisplay(e) {
-    // console.log('hit');
-    // console.log('e here:', e.target.value);
     this.setState({
       tab: e.target.value
     });
   }
 
   render() {
-    console.log(this.props.featuredEvent);
-    return (<div>
-              <h1>EVENT</h1>
-              <div>Display Event: {this.props.featuredEvent.Name}</div>
-              {this.state.tab === 'whatToBringBtn' ? <WhatToBring /> : null}
-              {this.state.tab === 'activitiesBtn' ? <Activities /> : null}
-              <FeatureNavigation changeDisplay={this.changeDisplay.bind(this)} />
-            </div>);
+    var view;
+    if (this.state.tab === 'whatToBringBtn') {
+      view = <WhatToBring />;
+    } else if (this.state.tab === 'activitiesBtn') {
+      view = <Activities />;
+    }
+    return (
+      <div>
+        <h1>EVENT</h1>
+        <div>Display Event: {this.props.featuredEvent.Name}</div>
+        {view}
+        <FeatureNavigation changeDisplay={this.changeDisplay} />
+      </div>
+    );
   }
 }
 window.EventPlanning = EventPlanning;

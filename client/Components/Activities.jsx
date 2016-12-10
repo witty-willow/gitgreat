@@ -4,6 +4,6 @@ class Activities extends React.Component {
   }
 
   render() {
-    return (<div>Activities Tab Stuff Here</div>)
+    return (<div>Activities Tab Stuff Here</div>);
   }
 }
