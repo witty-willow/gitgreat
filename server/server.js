@@ -8,7 +8,8 @@ const EventTable = require('../db/index.js');
 const app = express();
 
 app.use(parser.json());
-app.use(express.static('public'));
+app.use(express.static('../public'));
+app.use('/scripts', express.static('../node_modules'));
 
 
 // Links to database controllers
@@ -16,6 +17,10 @@ app.use(express.static('public'));
 // const itemList = path.join(__dirname, '../db/itemlist.js');
 
 const dbModels = require('../db/index.js');
+
+app.get('/', function(req, res, next) {
+  res.redirect('/homepage.html')
+});
 
 // Adds events from eventTable to database, using database method 'eventTable'
 app.post('/eventTable', function(req, res, next) {
@@ -30,7 +35,7 @@ app.post('/eventTable', function(req, res, next) {
     .catch(function(err) {
       console.log('Error: ', err);
     })
-}); 
+});
 
 app.get('/eventTable', function(req, res, next) {
   dbModels.EventTable.getAll()
