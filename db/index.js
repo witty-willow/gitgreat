@@ -19,7 +19,7 @@ var EventTable = sequelize.define('events', {
     type: Sequelize.STRING
   },
   when: {
-    type: Sequelize.STRING
+    type: Sequelize.DATE
   }
 });
 

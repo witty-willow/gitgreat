@@ -35,7 +35,7 @@ app.post('/eventTable', function(req, res, next) {
 });
 
 app.get('/eventTable', function(req, res, next) {
-  dbModels.EventTable.findAll({order: 'createdAt DESC'})
+  dbModels.EventTable.findAll({order: '"when" DESC'})
   .then(function(events) {
     utils.sendResponse(res, 200, 'application/json', events);
   });
@@ -46,7 +46,6 @@ app.post('/itemList', function(req, res, next) {
   dbModels.EventTable.findOne({where: {name: eventName}})
     .then(function(event) {
       var eventId = event.id;
-      console.log(eventId);
       dbModels.ItemListTable
       .create({
         item: req.body.item,
