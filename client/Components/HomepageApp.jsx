@@ -1,12 +1,3 @@
-// var App = (props) => {
-//   return (
-//     <div>
-//       <Nav />
-//       <EventList eventData={props.eventData}/>
-//     </div>
-//   );
-// };
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -16,6 +7,16 @@ class App extends React.Component {
       featuredEvent: null
     };
     this.handleEntryClick = this.handleEntryClick.bind(this);
+  }
+  componentDidMount() {
+    var successHandler = function(data) {
+      this.setState({eventList: data});
+    };
+    $.ajax({
+      method: 'GET',
+      url: '/eventTable',
+      success: successHandler.bind(this)
+    });
   }
 
   handleEntryClick(event) {

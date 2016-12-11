@@ -32,8 +32,10 @@ var ItemListTable = sequelize.define('itemlists', {
   },
   cost: {
     type: Sequelize.STRING
-  }
+  },
 });
+
+ItemListTable.belongsTo(EventTable);
 
 // test the connection, works!
 sequelize

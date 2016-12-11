@@ -2,9 +2,9 @@ class CreateEventApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      eventName: '',
-      eventDate: '',
-      eventLoc: ''
+      name: '',
+      when: '',
+      where: ''
     };
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
@@ -13,19 +13,26 @@ class CreateEventApp extends React.Component {
   }
 
   handleNameChange(event) {
-    this.setState({eventName: event.target.value});
+    this.setState({name: event.target.value});
   }
-
   handleDateChange(event) {
-    this.setState({eventDate: event.target.value});
+    this.setState({when: event.target.value});
   }
-
   handleLocChange(event) {
-    this.setState({eventLoc: event.target.value});
+    this.setState({where: event.target.value});
   }
 
   handleEventSubmit(event) {
-    console.log(this.state)
+    var successHandler = function() {
+      $('#msg').text('event successfully posted');
+    };
+    $.ajax({
+      method: 'POST',
+      url: '/eventTable',
+      contentType: 'application/json',
+      data: JSON.stringify(this.state),
+      success: successHandler.bind(this)
+    });
     event.preventDefault();
   } 
   render() {
@@ -36,23 +43,24 @@ class CreateEventApp extends React.Component {
           <label>
             Event Name:
             <input type="text" name="name" 
-              value={this.state.eventName}
+              value={this.state.name}
               onChange={this.handleNameChange}/>
           </label>
           <label>
             Event Date:
             <input type="text" name="date" 
-              value={this.state.eventDate}
+              value={this.state.when}
               onChange={this.handleDateChange}/>
           </label>
           <label>
             Event Location:
             <input type="text" name="location" 
-              value={this.state.eventLoc}
+              value={this.state.where}
               onChange={this.handleLocChange}/>
           </label>
           <input type="submit" value="Submit" />
         </form>
+        <div id='msg'></div>
       </div>
     );
   }
