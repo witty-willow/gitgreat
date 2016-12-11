@@ -18,32 +18,36 @@ class WhatToBring extends React.Component {
   }
 
   fetchItems() {
+    var eventParam = this.props.featuredEvent.name.split(' ').join('_');
     var successHandler = function(data) {
-      var parsedData = JSON.parse(data);
-      this.setState({itemList: parsedData});
+      this.setState({itemList: data});
     };
     $.ajax({
       method: 'GET',
-      url: '',
+      url: '/itemList?eventName=' + eventParam,
       success: successHandler.bind(this)
     });
   }
 
-  handleSubmit() {
+  handleSubmit(event) {
     var item = {
       item: this.state.currentItem,
-      cost: this.state.currentOwner,
-      owner: this.state.currentCost
+      cost: this.state.currentCost,
+      owner: this.state.currentOwner
     };
     var successHandler = function(data) {
       this.fetchItems();
     };
+    var eventParam = this.props.featuredEvent.name.split(' ').join('_');
+    console.log('/itemList?eventName=' + eventParam);
     $.ajax({
       method: 'POST',
-      url: '',
+      url: '/itemList?eventName=' + eventParam,
       data: JSON.stringify(item),
+      contentType: 'application/json',
       success: successHandler.bind(this)
     });
+    event.preventDefault();
   }
 
   handleItemChange(event) {
@@ -86,6 +90,7 @@ class WhatToBring extends React.Component {
             onChange={this.handleOwnerChange}
           />
           </label>
+          <input type="submit" value="Submit" />
         </form>
         <table>
           <thead>

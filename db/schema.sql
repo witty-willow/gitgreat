@@ -26,7 +26,7 @@ CREATE TABLE `itemlists` (
   `item` VARCHAR(60),
   `owner` VARCHAR(60),
   `cost` VARCHAR(60),
-  `event` INTEGER,
+  `eventId` INTEGER,
   `createdAt` VARCHAR(60),
   `updatedAt` VARCHAR(60),
   PRIMARY KEY (`id`)
@@ -36,7 +36,7 @@ CREATE TABLE `itemlists` (
 -- Foreign Keys 
 -- ---
 
-ALTER TABLE `itemlists` ADD FOREIGN KEY (event) REFERENCES `events` (`id`);
+ALTER TABLE `itemlists` ADD FOREIGN KEY (eventId) REFERENCES `events` (`id`);
 
 -- ---
 -- Table Properties

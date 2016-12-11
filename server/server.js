@@ -1,85 +1,84 @@
 const express = require('express');
-const path = require('path');
 const parser = require('body-parser');
+const url = require('url');
+
 const db = require('../db');
-const EventTable = require('../db/index.js');
-//
+const dbModels = require('../db/index.js');
+const utils = require('./utils.js');
 
 const app = express();
-
 app.use(parser.json());
 app.use(express.static('../public'));
 app.use('/scripts', express.static('../node_modules'));
 
-
-// Links to database controllers
-// const newEvent = path.join(__dirname, '../db/event.js');
-// const itemList = path.join(__dirname, '../db/itemlist.js');
-
-const dbModels = require('../db/index.js');
-
 app.get('/', function(req, res, next) {
-  res.redirect('/homepage.html')
+  res.redirect('/homepage.html');
 });
 
-// Adds events from eventTable to database, using database method 'eventTable'
+app.get('/create', function(req, res, next) {
+  res.redirect('/createEvent.html');
+});
+
 app.post('/eventTable', function(req, res, next) {
   dbModels.EventTable
-    .create({name: JSON.stringify(req.body.name),
-            where: JSON.stringify(req.body.where),
-            when: JSON.stringify(req.body.when)})
-    .save()
+    .create({
+      name: req.body.name,
+      where: req.body.where,
+      when: req.body.when
+    })
     .then(function(event) {
-      console.log(event);
+      res.redirect('/');
     })
     .catch(function(err) {
       console.log('Error: ', err);
-    })
+    });
 });
 
 app.get('/eventTable', function(req, res, next) {
-  dbModels.EventTable.getAll()
-  .then(function(resp) {
-    console.log('Got Events: ', resp);
+  dbModels.EventTable.findAll({order: 'createdAt DESC'})
+  .then(function(events) {
+    utils.sendResponse(res, 200, 'application/json', events);
   });
 });
 
 app.post('/itemList', function(req, res, next) {
-  dbModels.ItemListTable
-    .create({item: JSON.stringify(req.body.item),
-             owner: JSON.stringify(req.body.owner),
-             cost: JSON.stringify(req.body.cost)})
-    .save()
-    .then(function(item) {
-      console.log(item)
-    }).catch(function(err) {
-      console.log('Error: ', err);
-    })
-});
-app.get('/itemList', function(req, res, next) {
-  dbModels.ItemListTable.getAll()
-  .then(function(resp) {
-    console.log('Got Items: ', resp);
-  })
+  var eventName = url.parse(req.url).query.slice(10).split('_').join(' ');
+  dbModels.EventTable.findOne({where: {name: eventName}})
+    .then(function(event) {
+      var eventId = event.id;
+      console.log(eventId);
+      dbModels.ItemListTable
+      .create({
+        item: req.body.item,
+        owner: req.body.owner,
+        cost: req.body.cost,
+        eventId: eventId
+      })
+      .then(function(item) {
+        utils.sendResponse(res, 201, 'text/html', 'item successfully posted');
+      }).catch(function(err) {
+        console.log('Error: ', err);
+      });
+    });
 });
 
+app.get('/itemList', function(req, res, next) {
+  var eventName = url.parse(req.url).query.slice(10).split('_').join(' ');
+  dbModels.EventTable.findOne({where: {name: eventName}})
+    .then(function(event) {
+      var eventId = event.id;
+      console.log(eventId);
+      dbModels.ItemListTable.findAll({where: {eventId: eventId}})
+        .then(function(items) {
+          utils.sendResponse(res, 200, 'application/json', items);
+        });
+    });
+});
 
 app.listen(3000, function() {
   console.log('Server is listening on port 3000');
-})
+});
 
 module.exports = app;
-
-// dbModels.EventTable
-//   .create({name: 'Tim',//JSON.stringify(req.body.name),
-//           where: 'Hotpot',//JSON.stringify(req.body.where),
-//           when: '8PM'})//JSON.stringify(req.body.when)})
-//   .then(function(event) {
-//     console.log('event!!!!!!!!!', event);
-//   })
-//   .catch(function(err) {
-//     console.log('Hotpot Error: ', err);
-//   })
-
 
 
