@@ -4,7 +4,8 @@ class Reminders extends React.Component {
     this.state = {
       phoneNumber: '',
       msg: '',
-      when: ''
+      when: '',
+      reminders: []
     };
     this.handleWhenChange = this.handleWhenChange.bind(this);
     this.handleMsgChange = this.handleMsgChange.bind(this);
@@ -12,17 +13,21 @@ class Reminders extends React.Component {
     this.handleReminderSubmit = this.handleReminderSubmit.bind(this);
   }
 
-  // fetchReminders() {
-  //   var eventParam = this.props.featuredEvent.name.split(' ').join('_');
-  //   var successHandler = function(data) {
-  //     this.setState({itemList: data});
-  //   };
-  //   $.ajax({
-  //     method: 'GET',
-  //     url: '/itemList?eventName=' + eventParam,
-  //     success: successHandler.bind(this)
-  //   });
-  // }
+  componentDidMount() {
+    this.fetchReminders();
+  }
+
+  fetchReminders() {
+    var eventParam = this.props.featuredEvent.name.split(' ').join('_');
+    var successHandler = function(data) {
+      this.setState({reminders: data});
+    };
+    $.ajax({
+      method: 'GET',
+      url: '/reminders?eventName=' + eventParam,
+      success: successHandler.bind(this)
+    });
+  }
 
   handlePhoneNumberChange(event) {
     this.setState({phoneNumber: event.target.value});
@@ -75,6 +80,25 @@ class Reminders extends React.Component {
           <input type="submit" value="Submit" />
         </form>
         <div id='msg'></div>
+        <table>
+          <caption>ReminderList</caption>
+          <thead>
+            <tr>
+              <th>PhoneNumber</th>
+              <th>When</th>
+              <th>Msg</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.state.reminders.map( (reminder, index) => 
+              <tr key={index}>
+                <th>{reminder.phoneNumber}</th>
+                <th>{reminder.when}</th>
+                <th>{reminder.msg}</th>
+              </tr>
+            )}
+          </tbody>
+        </table>
       </div>
     );
   }

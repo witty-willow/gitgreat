@@ -95,16 +95,22 @@ app.post('/reminders', function(req, res, next) {
     });
 });
 
+app.get('/reminders', function(req, res, next) {
+  var eventName = url.parse(req.url).query.slice(10).split('_').join(' ');
+  dbModels.EventTable.findOne({where: {name: eventName}})
+    .then(function(event) {
+      var eventId = event.id;
+      dbModels.ReminderTable.findAll({where: {eventId: eventId}})
+        .then(function(reminders) {
+          utils.sendResponse(res, 200, 'application/json', reminders);
+        });
+    });
+});
+
 app.listen(3000, function() {
   console.log('Server is listening on port 3000');
 });
 
-// dbModels.ReminderTable.create({
-//   phoneNumber: '6036863171',
-//   msg: 'reminder1',
-//   when: '2016-12-12 11:00:00',
-//   eventId: '1'
-// });
 
 module.exports = app;
 
