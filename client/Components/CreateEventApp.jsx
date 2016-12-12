@@ -48,7 +48,7 @@ class CreateEventApp extends React.Component {
           </label>
           <label>
             Event Date:
-            <input type="text" name="date" 
+            <input type="datetime-local" name="date" 
               value={this.state.when}
               onChange={this.handleDateChange}/>
           </label>

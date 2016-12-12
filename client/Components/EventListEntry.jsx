@@ -3,7 +3,7 @@ var EventListEntry = (props) => (
     {props.event.id}<br />
     {props.event.name}<br />
     {props.event.where}<br />
-    {props.event.when}<br/>
+    {props.event.when}<br />
   </div>
 );
 

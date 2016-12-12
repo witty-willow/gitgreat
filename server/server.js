@@ -8,6 +8,7 @@ const utils = require('./utils.js');
 
 const app = express();
 app.use(parser.json());
+
 app.use(express.static('../public'));
 app.use('/scripts', express.static('../node_modules'));
 
@@ -35,7 +36,7 @@ app.post('/eventTable', function(req, res, next) {
 });
 
 app.get('/eventTable', function(req, res, next) {
-  dbModels.EventTable.findAll({order: 'createdAt DESC'})
+  dbModels.EventTable.findAll({order: [['when', 'DESC']]})
   .then(function(events) {
     utils.sendResponse(res, 200, 'application/json', events);
   });
@@ -46,7 +47,6 @@ app.post('/itemList', function(req, res, next) {
   dbModels.EventTable.findOne({where: {name: eventName}})
     .then(function(event) {
       var eventId = event.id;
-      console.log(eventId);
       dbModels.ItemListTable
       .create({
         item: req.body.item,
@@ -67,7 +67,6 @@ app.get('/itemList', function(req, res, next) {
   dbModels.EventTable.findOne({where: {name: eventName}})
     .then(function(event) {
       var eventId = event.id;
-      console.log(eventId);
       dbModels.ItemListTable.findAll({where: {eventId: eventId}})
         .then(function(items) {
           utils.sendResponse(res, 200, 'application/json', items);
@@ -77,6 +76,13 @@ app.get('/itemList', function(req, res, next) {
 
 app.listen(3000, function() {
   console.log('Server is listening on port 3000');
+});
+
+dbModels.ReminderTable.create({
+  phoneNumber: '6036863171',
+  msg: 'reminder1',
+  when: '2016-12-12 10:11:00',
+  eventId: '1'
 });
 
 module.exports = app;

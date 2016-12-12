@@ -39,7 +39,6 @@ class WhatToBring extends React.Component {
       this.fetchItems();
     };
     var eventParam = this.props.featuredEvent.name.split(' ').join('_');
-    console.log('/itemList?eventName=' + eventParam);
     $.ajax({
       method: 'POST',
       url: '/itemList?eventName=' + eventParam,
@@ -73,6 +72,12 @@ class WhatToBring extends React.Component {
       <div>What To Bring Page
         <form onSubmit={this.handleSubmit}>
           <label>
+            Owner:
+          <input type='text' name='owner' 
+            onChange={this.handleOwnerChange}
+          />
+          </label>
+          <label>
             Item: 
             <input type='text' name='item' 
               onChange={this.handleItemChange}
@@ -84,15 +89,10 @@ class WhatToBring extends React.Component {
               onChange={this.handleCostChange}
             />
           </label>
-          <label>
-            Owner:
-          <input type='text' name='owner' 
-            onChange={this.handleOwnerChange}
-          />
-          </label>
           <input type="submit" value="Submit" />
         </form>
         <table>
+          <caption>Itemlist</caption>
           <thead>
             <tr>
               <th>Item</th>
@@ -101,8 +101,8 @@ class WhatToBring extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {this.state.itemList.map( (item) => 
-              <tr>
+            {this.state.itemList.map( (item, index) => 
+              <tr key={index}>
                 <th>{item.item}</th>
                 <th>{item.cost}</th>
                 <th>{item.owner}</th>
