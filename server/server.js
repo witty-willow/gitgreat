@@ -8,6 +8,7 @@ const utils = require('./utils.js');
 
 const app = express();
 app.use(parser.json());
+
 app.use(express.static('../public'));
 app.use('/scripts', express.static('../node_modules'));
 
@@ -66,7 +67,6 @@ app.get('/itemList', function(req, res, next) {
   dbModels.EventTable.findOne({where: {name: eventName}})
     .then(function(event) {
       var eventId = event.id;
-      console.log(eventId);
       dbModels.ItemListTable.findAll({where: {eventId: eventId}})
         .then(function(items) {
           utils.sendResponse(res, 200, 'application/json', items);

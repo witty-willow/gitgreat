@@ -2,7 +2,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      eventList: eventData,
+      eventList: null,
       page: 'homepage',
       featuredEvent: null
     };
@@ -29,10 +29,13 @@ class App extends React.Component {
   render() {
     var view;
     if (this.state.page === 'homepage') {
-      view = <EventList
-          eventData={this.state.eventList}
-          handleEntryClick={this.handleEntryClick}
-      />;
+      view = 
+        (<div>
+          <EventList
+            eventData={this.state.eventList}
+            handleEntryClick={this.handleEntryClick}
+          />;
+        </div>);
     } else if (this.state.page === 'eventDetails') {
       view = <EventPlanning featuredEvent={this.state.featuredEvent}/>;
     }
