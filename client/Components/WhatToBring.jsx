@@ -69,8 +69,8 @@ class WhatToBring extends React.Component {
 
   render() {
     return (
-      <div>What To Bring Page
-        <form onSubmit={this.handleSubmit}>
+      <div>
+        <form className="bringForm" onSubmit={this.handleSubmit}>
           <label>
             Owner:
           <input type='text' name='owner' 
@@ -91,21 +91,20 @@ class WhatToBring extends React.Component {
           </label>
           <input type="submit" value="Submit" />
         </form>
-        <table>
-          <caption>Itemlist</caption>
+        <table className="bringTable">
           <thead>
             <tr>
+              <th>Owner</th>
               <th>Item</th>
               <th>Cost</th>
-              <th>Owner</th>
             </tr>
           </thead>
           <tbody>
             {this.state.itemList.map( (item, index) => 
               <tr key={index}>
+                <th>{item.owner}</th>
                 <th>{item.item}</th>
                 <th>{item.cost}</th>
-                <th>{item.owner}</th>
               </tr>
             )}
           </tbody>

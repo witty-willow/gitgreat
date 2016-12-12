@@ -26,7 +26,7 @@ class EventList extends React.Component {
   render() {
     return (
       <div>
-        <div id='upcoming'> 
+        <div className='featureBody' id='upcoming'> 
           <h2>Upcoming Events</h2>
           {this.state.upcoming.map((event, index) => {
             return ( 
@@ -37,7 +37,7 @@ class EventList extends React.Component {
             );
           })}
         </div>
-        <div id='completed'> 
+        <div className='featureBody' id='completed'> 
           <h2>Completed Events</h2>
             {this.state.completed.map((event, index) => {
               return ( 

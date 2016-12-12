@@ -1,9 +1,8 @@
 var EventListEntry = (props) => (
-  <div onClick={() => props.handleEntryClick(props.event)}>
-    {props.event.id}<br />
-    {props.event.name}<br />
-    {props.event.where}<br />
-    {props.event.when}<br />
+  <div className="listEntry" onClick={() => props.handleEntryClick(props.event)}>
+    <strong>{props.event.name}</strong><br />
+    Location: {props.event.where}<br />
+    Time: {props.event.when}<br />
   </div>
 );
 
