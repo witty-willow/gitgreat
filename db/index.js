@@ -11,18 +11,6 @@ var sequelize = new Sequelize('gitgreat', 'root', '', {
   host: 'localhost', dialect: 'mysql'
 });
 
-var ReminderTable = sequelize.define('reminders', {
-  phoneNumber: {
-    type: Sequelize.INTEGER
-  },
-  msg: {
-    type: Sequelize.STRING
-  },
-  when: {
-    type: Sequelize.DATE
-  },
-});
-
 var EventTable = sequelize.define('events', {
   name: {
     type: Sequelize.STRING
@@ -44,6 +32,18 @@ var ItemListTable = sequelize.define('itemlists', {
   },
   cost: {
     type: Sequelize.STRING
+  },
+});
+
+var ReminderTable = sequelize.define('reminders', {
+  phoneNumber: {
+    type: Sequelize.INTEGER
+  },
+  msg: {
+    type: Sequelize.STRING
+  },
+  when: {
+    type: Sequelize.DATE
   },
 });
 
