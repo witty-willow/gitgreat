@@ -12,23 +12,26 @@ var job = new CronJob('10 * * * * *',
   function() {
     dbModels.ReminderTable.findOne({order: [['when']]})
     .then(function(reminder) {
-      console.log(reminder);
-      var now = new Date();
-      var reminderDate = new Date(reminder.when);
-      console.log(now, reminderDate);
-      if (now >= reminderDate) {
-        console.log('about to send to twilio');
-        client.sendMessage({ 
-          to: reminder.phoneNumber, 
-          from: '+19786753367 ', 
-          body: reminder.msg,
-        }, function(err, responseData) { //this function is executed when a response is received from Twilio
-          if (!err) { // "err" is an error received during the request, if any
-            console.log(responseData.from); // outputs "+14506667788"
-            console.log(responseData.body); // outputs "word to your mother."
-            reminder.destroy();
-          }
-        });
+      if (!!reminder) {
+        var now = new Date();
+        var reminderDate = new Date(reminder.when);
+        console.log(now, reminderDate);
+        if (now >= reminderDate) {
+          console.log('about to send to twilio');
+          client.sendMessage({ 
+            to: reminder.phoneNumber, 
+            from: '+19786753367 ', 
+            body: reminder.msg,
+          }, function(err, responseData) { //this function is executed when a response is received from Twilio
+            if (!err) { // "err" is an error received during the request, if any
+              console.log(responseData.from); // outputs "+14506667788"
+              console.log(responseData.body); // outputs "word to your mother."
+              reminder.destroy();
+            }
+          });
+        } else {
+          console.log('no reminders');
+        }        
       }
     });
   }, function () {

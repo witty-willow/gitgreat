@@ -21,7 +21,7 @@ class EventPlanning extends React.Component {
     } else if (this.state.tab === 'activitiesBtn') {
       view = <Activities />;
     } else if (this.state.tab === 'reminderBtn') {
-      view = <Reminders />;
+      view = <Reminders featuredEvent={this.props.featuredEvent}/>;
     }
     return (
       <div>
