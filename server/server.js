@@ -78,6 +78,13 @@ app.listen(3000, function() {
   console.log('Server is listening on port 3000');
 });
 
+dbModels.ReminderTable.create({
+  phoneNumber: '6036863171',
+  msg: 'reminder1',
+  when: '2016-12-12 10:11:00',
+  eventId: '1'
+});
+
 module.exports = app;
 
 

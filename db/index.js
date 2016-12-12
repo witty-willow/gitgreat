@@ -11,6 +11,18 @@ var sequelize = new Sequelize('gitgreat', 'root', '', {
   host: 'localhost', dialect: 'mysql'
 });
 
+var ReminderTable = sequelize.define('reminders', {
+  phoneNumber: {
+    type: Sequelize.INTEGER
+  },
+  msg: {
+    type: Sequelize.STRING
+  },
+  when: {
+    type: Sequelize.DATE
+  },
+});
+
 var EventTable = sequelize.define('events', {
   name: {
     type: Sequelize.STRING
@@ -36,8 +48,8 @@ var ItemListTable = sequelize.define('itemlists', {
 });
 
 ItemListTable.belongsTo(EventTable);
+ReminderTable.belongsTo(EventTable);
 
-// test the connection, works!
 sequelize
   .authenticate()
   .then(function(err) {
@@ -49,3 +61,4 @@ sequelize
 
 module.exports.EventTable = EventTable;
 module.exports.ItemListTable = ItemListTable;    
+module.exports.ReminderTable = ReminderTable;

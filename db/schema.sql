@@ -2,6 +2,29 @@ CREATE DATABASE gitgreat;
 
 USE gitgreat;
 
+-- ---
+-- Table 'reminders'
+-- 
+-- ---
+
+DROP TABLE IF EXISTS `reminders`;
+    
+CREATE TABLE `reminders` (
+  `id` INTEGER AUTO_INCREMENT,
+  `phoneNumber` VARCHAR(15),
+  `msg` VARCHAR(200),
+  `when` VARCHAR(60),
+  `eventId` INTEGER,
+  `createdAt` VARCHAR(60),
+  `updatedAt` VARCHAR(60),
+  PRIMARY KEY (`id`)
+);
+
+-- ---
+-- Table 'events'
+-- 
+-- ---
+
 DROP TABLE IF EXISTS `events`;
     
 CREATE TABLE `events` (
@@ -37,6 +60,7 @@ CREATE TABLE `itemlists` (
 -- ---
 
 ALTER TABLE `itemlists` ADD FOREIGN KEY (eventId) REFERENCES `events` (`id`);
+ALTER TABLE `reminders` ADD FOREIGN KEY (eventId) REFERENCES `events` (`id`);
 
 -- ---
 -- Table Properties
