@@ -1,6 +1,7 @@
 //Parent App within homepage.html
 //Allows users to view events, create and view event planning details
 
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -10,6 +11,7 @@ class App extends React.Component {
       featuredEvent: null
     };
     this.handleEntryClick = this.handleEntryClick.bind(this);
+    this.handleCreateClick = this.handleCreateClick.bind(this);
   }
   componentDidMount() {
     //sends a get request to the server to populate the eventList array in this component's state,
@@ -32,6 +34,12 @@ class App extends React.Component {
     });
   }
 
+  handleCreateClick(event) {
+    this.setState({
+      page: 'createEvent'
+    });
+  }
+
   render() {
     var view;
     //view logic: if an event has been clicked on, then the page should view 
@@ -47,11 +55,13 @@ class App extends React.Component {
         </div>);
     } else if (this.state.page === 'eventDetails') {
       view = <EventPlanning featuredEvent={this.state.featuredEvent}/>;
+    } else if (this.state.page === 'createEvent') {
+      view = <CreateEventApp />
     }
 
     return (
       <div>
-        <Nav />
+        <Nav handleCreateClick={this.handleCreateClick}/>
         {view}
       </div>
     );
