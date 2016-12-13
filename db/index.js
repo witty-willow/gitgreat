@@ -1,17 +1,23 @@
 var Sequelize = require('sequelize');
 var mysql = require('mysql');
 
+var sequelize = new Sequelize('gitgreat', 'root', '', {
+  host: 'localhost', dialect: 'mysql'
+});
+
 mysql.createConnection({
   user: root,
   password: null,
   database: 'gitgreat'
 });
 
-var sequelize = new Sequelize('gitgreat', 'root', '', {
-  host: 'localhost', dialect: 'mysql'
-});
 
 var EventTable = sequelize.define('events', {
+  id: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    primaryKey: true
+  },
   name: {
     type: Sequelize.STRING
   },
@@ -35,6 +41,12 @@ var ItemListTable = sequelize.define('itemlists', {
   },
 });
 
+var PhotosTable = sequelize.define('photos', {
+ url: {
+   type: Sequelize.STRING
+ }
+});
+
 var ReminderTable = sequelize.define('reminders', {
   phoneNumber: {
     type: Sequelize.INTEGER
@@ -47,9 +59,27 @@ var ReminderTable = sequelize.define('reminders', {
   },
 });
 
+var UsersTable = sequelize.define('users', {
+  id: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    primaryKey: true
+  },
+  username: {
+    type: Sequelize.STRING
+  },
+  password: {
+    type: Sequelize.STRING
+  },
+});
+
+
+
 //Create associations such that ItemListTable and ReminderTable contain eventId
 ItemListTable.belongsTo(EventTable);
 ReminderTable.belongsTo(EventTable);
+UsersTable.belongsToMany(EventTable, {through: 'UsersTableEventTable'});
+EventTable.belongsToMany(UsersTable, {through: 'UsersTableEventTable'});
 
 sequelize
   .authenticate()
@@ -60,14 +90,13 @@ sequelize
     console.log('Unable to connect to the database:', err);
   });
 
-var PhotosTable = sequelize.define('photos', {
- url: {
-   type: Sequelize.STRING
- }
-});
 
+
+sequelize.sync({force: true})
+  .then(function(err) {console.log('It worked!')}, function(err) {console.log('Error occured', err)});
 
 module.exports.PhotosTable = PhotosTable;
 module.exports.EventTable = EventTable;
 module.exports.ItemListTable = ItemListTable;    
 module.exports.ReminderTable = ReminderTable;
+module.exports.UsersTable = UsersTable;
