@@ -7,10 +7,10 @@ class EventPlanning extends React.Component {
       tab: false
     };
 
-    this.changeDisplay = this.changeDisplay.bind(this);
+    this.changeTabDisplay = this.changeTabDisplay.bind(this);
   }
 
-  changeDisplay(e) {
+  changeTabDisplay(e) {
     this.setState({
       tab: e.target.value
     });
@@ -30,7 +30,7 @@ class EventPlanning extends React.Component {
     return (
       <div>
         <h1 className="eventHeader">{this.props.featuredEvent.name} | {this.props.featuredEvent.where} | {this.props.featuredEvent.when}</h1>
-        <FeatureNavigation changeDisplay={this.changeDisplay} />
+        <FeatureNavigation changeDisplay={this.changeTabDisplay} />
         {view}
       </div>
     );
