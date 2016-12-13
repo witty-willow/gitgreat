@@ -10,6 +10,7 @@ class App extends React.Component {
   }
   componentDidMount() {
     var successHandler = function(data) {
+      console.log(data);
       this.setState({eventList: data});
     };
     $.ajax({

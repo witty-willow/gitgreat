@@ -59,6 +59,14 @@ sequelize
     console.log('Unable to connect to the database:', err);
   });
 
+var PhotosTable = sequelize.define('photos', {
+ url: {
+   type: Sequelize.STRING
+ }
+});
+
+
+module.exports.PhotosTable = PhotosTable;
 module.exports.EventTable = EventTable;
 module.exports.ItemListTable = ItemListTable;    
 module.exports.ReminderTable = ReminderTable;

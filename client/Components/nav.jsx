@@ -1,8 +1,9 @@
 var Nav = () => (
-  <div>
+  <div className="nav">
+  	<a href='/' className="title">Friends</a>
     <a href='/'>Home </a>
     <a href='/create'>Create Event</a>
-    <a href=''>Sign-in to HR50</a>
+    <a href='#'>Log In</a>
   </div>
 );
 
