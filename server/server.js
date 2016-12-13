@@ -6,6 +6,16 @@ const db = require('../db');
 const dbModels = require('../db/index.js');
 const utils = require('./utils.js');
 
+const cloudinary = require('cloudinary');
+const multiparty = require('multiparty');
+
+// Wells's cloudinary api key, replace with your own as this key will be deleted soon
+cloudinary.config({
+ cloud_name: 'dhdysf6qc',
+ api_key: '299727653385491',
+ api_secret: 'vshmxkEjzRiylUjrXi20qk67hKA'
+});
+
 const app = express();
 app.use(parser.json());
 
@@ -105,6 +115,41 @@ app.get('/reminders', function(req, res, next) {
           utils.sendResponse(res, 200, 'application/json', reminders);
         });
     });
+});
+
+
+app.post('/uploadImage', function(req, res) {
+ console.log('hits uploadImage in server');
+ var form = new multiparty.Form();
+ form.parse(req, function(err, fields, files) {
+   console.log('fields: ', fields);
+   console.log('files: ', files);
+   console.log('file:', files.imageFile[0].path);
+
+   cloudinary.uploader.upload(files.imageFile[0].path, function(result) {
+     console.log('cloudinary resulttt: ', result);
+     dbModels.PhotosTable.create({url: result.url})
+       .then(function(event) {
+         console.log('successfully added url to db!!!');
+       })
+       .catch(function(err) {
+         console.log('photosTable db entry error: ', err);
+       });
+   });
+
+ });
+ res.send();
+});
+
+app.get('/displayImages', function(req, res) {
+ console.log('hits displayimages in server');
+ dbModels.PhotosTable.findAll()
+ .then(function(data) {
+   for(var pair in data.entries()) {
+     console.log(pair);
+   }
+   res.send(data);
+ });
 });
 
 app.listen(3000, function() {
