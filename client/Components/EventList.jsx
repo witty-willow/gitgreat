@@ -9,7 +9,7 @@ class EventList extends React.Component {
     };
   }
   componentWillReceiveProps(nextProps) {
-    //This function will sort the events in the eventList into two categories: upcoming and deleted
+    //This function will sort the events in the eventList into two categories: upcoming and completed
     //The sort logic compares the event date with the current date and checks to see if the event 
     //has already passed.
     if (nextProps.eventData) {
