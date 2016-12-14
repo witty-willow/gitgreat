@@ -1,6 +1,10 @@
 //Parent App within homepage.html
 //Allows users to view events, create and view event planning details
-
+import React from 'react';
+import EventList from './EventList.jsx';
+import EventPlanning from './EventPlanning.jsx';
+import CreateEventApp from './CreateEventApp.jsx';
+import Nav from './Nav.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -42,11 +46,11 @@ class App extends React.Component {
 
   render() {
     var view;
-    //view logic: if an event has been clicked on, then the page should view 
-    //the eventDetails page--the EventPlanning component. Otherwise, show the 
+    //view logic: if an event has been clicked on, then the page should view
+    //the eventDetails page--the EventPlanning component. Otherwise, show the
     //homepage--the EventList component.
     if (this.state.page === 'homepage') {
-      view = 
+      view =
         (<div>
           <EventList
             eventData={this.state.eventList}
@@ -68,5 +72,4 @@ class App extends React.Component {
   }
 }
 
-
-window.App = App;
+module.exports = App;

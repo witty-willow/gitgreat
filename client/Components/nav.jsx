@@ -1,4 +1,4 @@
-//Child component within the HomepageApp and the CreateEventApp to toggle 
+//Child component within the HomepageApp and the CreateEventApp to toggle
 //between the two App pages.
 var Nav = ({handleCreateClick}) => (
   <div className="nav">
@@ -9,4 +9,4 @@ var Nav = ({handleCreateClick}) => (
   </div>
 );
 
-window.Nav = Nav;
+module.exports = Nav;

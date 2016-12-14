@@ -1,3 +1,10 @@
+import React from 'react';
+import WhatToBring from './WhatToBring.jsx';
+import Activities from './Activities.jsx';
+import Reminders from './Reminders.jsx';
+import Photos from './Photos.jsx';
+import FeatureNavigation from './FeatureNavigation.jsx';
+
 //Child component contained within HomepageApp
 //Contains the event planning navigation bar
 class EventPlanning extends React.Component {
@@ -36,5 +43,5 @@ class EventPlanning extends React.Component {
     );
   }
 }
-window.EventPlanning = EventPlanning;
+module.exports = EventPlanning;
 
