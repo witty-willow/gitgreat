@@ -1,5 +1,6 @@
 import React from 'react';
 import EventListEntry from './EventListEntry.jsx';
+import $ from 'jquery';
 
 //Child component within HomepageApp
 //Will receive the eventList in an array as a prop and will create EventListEntries for each event
@@ -7,30 +8,46 @@ class EventList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      eventList: [],
+      featuredEvent: {},
       upcoming: [],
       completed: []
     };
+    this.handleEntryClick = this.handleEntryClick.bind(this);
   }
-  componentWillReceiveProps(nextProps) {
+  componentWillMount() {
     //This function will sort the events in the eventList into two categories: upcoming and completed
     //The sort logic compares the event date with the current date and checks to see if the event
     //has already passed.
-    if (nextProps.eventData) {
-      var upcoming = [];
-      var completed = [];
-      nextProps.eventData.forEach((event) => {
-        var now = new Date();
-        var eventDate = new Date(event.when);
-        if (eventDate >= now) {
-          upcoming.push(event);
-        } else {
-          completed.push(event);
-        }
-      });
-      this.setState({upcoming: upcoming, completed: completed});
-    }
+    $.ajax({
+      method: 'GET',
+      url: '/eventTable',
+      success: function(data) {
+        this.setState({eventList: data});
+        var upcoming = [];
+        var completed = [];
+        data.forEach((event) => {
+          var now = new Date();
+          var eventDate = new Date(event.when);
+          if (eventDate >= now) {
+            upcoming.push(event);
+          } else {
+            completed.push(event);
+          }
+        });
+        this.setState({
+          upcoming: upcoming, 
+          completed: completed,
+          eventList: data
+        });
+      }.bind(this)
+    });
   }
-
+  handleEntryClick(event) {
+    this.setState({
+      featuredEvent: event
+    });
+  }
   render() {
     return (
       <div>
@@ -40,7 +57,7 @@ class EventList extends React.Component {
             return (
               <EventListEntry
                 key={index} event={event}
-                handleEntryClick={this.props.handleEntryClick}
+                handleEntryClick={this.handleEntryClick}
               />
             );
           })}
@@ -51,7 +68,7 @@ class EventList extends React.Component {
               return (
                 <EventListEntry
                   key={index} event={event}
-                  handleEntryClick={this.props.handleEntryClick}
+                  handleEntryClick={this.handleEntryClick}
                 />
               );
             })}
