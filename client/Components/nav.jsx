@@ -4,10 +4,10 @@ import {Link} from 'react-router'
 
 var Nav = ({handleCreateClick}) => (
   <div className="nav">
-    <a href='/' className="title">Friends</a>
-    <a href='/'>Home </a>
+    <Link to={'/'} className='title'>Friends</Link>
+    <Link to={'/'}>Home </Link>
     <Link to={'/create'} >Create Event</Link>
-    <a href='#'>Log In</a>
+    <Link to={'/login'}>Log In</Link>
   </div>
 );
 
