@@ -38,7 +38,7 @@ class EventPlanning extends React.Component {
       <div>
         <h1 className="eventHeader">{this.props.featuredEvent.name} | {this.props.featuredEvent.where} | {this.props.featuredEvent.when}</h1>
         <FeatureNavigation changeDisplay={this.changeTabDisplay} />
-        {view}
+        {this.props.children}
       </div>
     );
   }
