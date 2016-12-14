@@ -8,6 +8,7 @@ const utils = require('./utils.js');
 
 const cloudinary = require('cloudinary');
 const multiparty = require('multiparty');
+var path = require('path');
 
 // Wells's cloudinary api key, replace with your own as this key will be deleted soon
 cloudinary.config({
@@ -25,10 +26,7 @@ app.use(express.static('../public'));
 app.use('/scripts', express.static('../node_modules'));
 
 app.get('/', function(req, res, next) {
-  res.redirect('/homepage.html');
-});
-app.get('/create', function(req, res, next) {
-  res.redirect('/createEvent.html');
+  res.sendFile(path.join(__dirname, '../public/homepage.html'));
 });
 
 app.post('/eventTable', function(req, res, next) {

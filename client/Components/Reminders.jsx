@@ -1,3 +1,4 @@
+import React from 'react';
 //Child component within the Event Planning component
 //Allows users to send a reminder for purposes of event planning
 class Reminders extends React.Component {
@@ -20,7 +21,7 @@ class Reminders extends React.Component {
   }
 
   fetchReminders() {
-    //The event name is passed along to the server via query parameters 
+    //The event name is passed along to the server via query parameters
     //so that we can display reminders associated with a specific event.
     var eventParam = this.props.featuredEvent.name.split(' ').join('_');
     var successHandler = function(data) {
@@ -44,7 +45,7 @@ class Reminders extends React.Component {
   }
 
   handleReminderSubmit(event) {
-    //The event name is passed along to the server via query parameters 
+    //The event name is passed along to the server via query parameters
     //so that we can submit reminders associated with a specific event.
     var successHandler = function() {
       $('#msg').text('reminder successfully posted');
@@ -58,7 +59,7 @@ class Reminders extends React.Component {
       success: successHandler.bind(this)
     });
     event.preventDefault();
-  } 
+  }
 
   render() {
     return (
@@ -67,19 +68,19 @@ class Reminders extends React.Component {
         <form onSubmit={this.handleReminderSubmit}>
           <label>
             Phone Number:
-            <input type="text" name="phoneNumber" 
+            <input type="text" name="phoneNumber"
               value={this.state.phoneNumber}
               onChange={this.handlePhoneNumberChange}/>
           </label>
           <label>
             When:
-            <input type="datetime-local" name="when" 
+            <input type="datetime-local" name="when"
               value={this.state.when}
               onChange={this.handleWhenChange}/>
           </label>
           <label>
             Msg:
-            <input type="text" name="msg" 
+            <input type="text" name="msg"
               value={this.state.msg}
               onChange={this.handleMsgChange}/>
           </label>
@@ -96,7 +97,7 @@ class Reminders extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {this.state.reminders.map( (reminder, index) => 
+            {this.state.reminders.map( (reminder, index) =>
               <tr key={index}>
                 <th>{reminder.phoneNumber}</th>
                 <th>{reminder.when}</th>

@@ -1,3 +1,6 @@
+import React from 'react';
+import EventListEntry from './EventListEntry.jsx';
+
 //Child component within HomepageApp
 //Will receive the eventList in an array as a prop and will create EventListEntries for each event
 class EventList extends React.Component {
@@ -10,7 +13,7 @@ class EventList extends React.Component {
   }
   componentWillReceiveProps(nextProps) {
     //This function will sort the events in the eventList into two categories: upcoming and completed
-    //The sort logic compares the event date with the current date and checks to see if the event 
+    //The sort logic compares the event date with the current date and checks to see if the event
     //has already passed.
     if (nextProps.eventData) {
       var upcoming = [];
@@ -31,23 +34,23 @@ class EventList extends React.Component {
   render() {
     return (
       <div>
-        <div className='featureBody' id='upcoming'> 
+        <div className='featureBody' id='upcoming'>
           <h2>Upcoming Events</h2>
           {this.state.upcoming.map((event, index) => {
-            return ( 
-              <EventListEntry 
-                key={index} event={event} 
+            return (
+              <EventListEntry
+                key={index} event={event}
                 handleEntryClick={this.props.handleEntryClick}
               />
             );
           })}
         </div>
-        <div className='featureBody' id='completed'> 
+        <div className='featureBody' id='completed'>
           <h2>Completed Events</h2>
             {this.state.completed.map((event, index) => {
-              return ( 
-                <EventListEntry 
-                  key={index} event={event} 
+              return (
+                <EventListEntry
+                  key={index} event={event}
                   handleEntryClick={this.props.handleEntryClick}
                 />
               );
@@ -59,4 +62,4 @@ class EventList extends React.Component {
 }
 
 
-window.EventList = EventList;
+module.exports = EventList;

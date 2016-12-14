@@ -1,3 +1,5 @@
+import React from 'react';
+import Nav from './Nav.jsx';
 //Parent App within createEvent.html
 //Allows users to create new events
 class CreateEventApp extends React.Component {
@@ -38,7 +40,7 @@ class CreateEventApp extends React.Component {
       success: successHandler.bind(this)
     });
     event.preventDefault();
-  } 
+  }
   render() {
     return (
       <div>
@@ -46,20 +48,20 @@ class CreateEventApp extends React.Component {
         <div className="featureBody" id="createEvent">
           <form onSubmit={this.handleEventSubmit}>
             <p><label>
-              Name:  
-              <input type="text" name="name" 
+              Name:
+              <input type="text" name="name"
                 value={this.state.name}
                 onChange={this.handleNameChange}/>
             </label></p>
             <p><label>
               Date:
-              <input type="datetime-local" name="date" 
+              <input type="datetime-local" name="date"
                 value={this.state.when}
                 onChange={this.handleDateChange}/>
             </label></p>
             <p><label>
-              Location: 
-              <input type="text" name="location" 
+              Location:
+              <input type="text" name="location"
                 value={this.state.where}
                 onChange={this.handleLocChange}/>
             </label></p>
@@ -72,4 +74,4 @@ class CreateEventApp extends React.Component {
   }
 }
 
-window.CreateEventApp = CreateEventApp;
+module.exports = CreateEventApp;
