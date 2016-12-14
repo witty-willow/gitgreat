@@ -90,3 +90,5 @@ class Photos extends React.Component {
             </div>);
   }
 }
+
+module.exports = Photos;
