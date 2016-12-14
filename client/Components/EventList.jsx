@@ -9,11 +9,9 @@ class EventList extends React.Component {
     super(props);
     this.state = {
       eventList: [],
-      featuredEvent: {},
       upcoming: [],
       completed: []
     };
-    this.handleEntryClick = this.handleEntryClick.bind(this);
   }
   componentWillMount() {
     //This function will sort the events in the eventList into two categories: upcoming and completed
@@ -36,16 +34,11 @@ class EventList extends React.Component {
           }
         });
         this.setState({
-          upcoming: upcoming, 
+          upcoming: upcoming,
           completed: completed,
           eventList: data
         });
       }.bind(this)
-    });
-  }
-  handleEntryClick(event) {
-    this.setState({
-      featuredEvent: event
     });
   }
   render() {
@@ -57,7 +50,7 @@ class EventList extends React.Component {
             return (
               <EventListEntry
                 key={index} event={event}
-                handleEntryClick={this.handleEntryClick}
+                handleEntryClick={this.props.handleEntryClick}
               />
             );
           })}
@@ -68,7 +61,7 @@ class EventList extends React.Component {
               return (
                 <EventListEntry
                   key={index} event={event}
-                  handleEntryClick={this.handleEntryClick}
+                  handleEntryClick={this.props.handleEntryClick}
                 />
               );
             })}

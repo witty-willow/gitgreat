@@ -13,3 +13,5 @@ class Activities extends React.Component {
     return (<div>Activities Tab Stuff Here</div>);
   }
 }
+
+module.exports = Activities;
