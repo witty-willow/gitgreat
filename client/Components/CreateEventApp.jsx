@@ -26,7 +26,6 @@ class CreateEventApp extends React.Component {
   handleLocChange(event) {
     this.setState({where: event.target.value});
   }
-
   handleEventSubmit(event) {
     //sends a post request with the event data to the server, which will enter the event into
     //the eventTable
@@ -38,7 +37,9 @@ class CreateEventApp extends React.Component {
         url: '/eventTable',
         contentType: 'application/json',
         data: JSON.stringify(this.state),
-        success: browserHistory.push('/')
+        success: function() {
+          this.props.getEventData(this.state);
+        }.bind(this)
       });
       event.preventDefault();
     } else {

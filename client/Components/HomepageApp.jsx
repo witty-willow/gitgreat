@@ -14,8 +14,16 @@ class App extends React.Component {
       featuredEvent: {}
     }
     this.handleEntryClick = this.handleEntryClick.bind(this);
+    this.getEventData = this.getEventData.bind(this);
   }
   handleEntryClick(event) {
+    this.setState({
+      featuredEvent: event,
+    }, function() {
+      browserHistory.push('/planning');
+    });
+  }
+  getEventData(event) {
     this.setState({
       featuredEvent: event,
     }, function() {
@@ -28,7 +36,8 @@ class App extends React.Component {
         <Nav />
         {this.props.children && React.cloneElement(this.props.children, {
           featuredEvent: this.state.featuredEvent,
-          handleEntryClick: this.handleEntryClick
+          handleEntryClick: this.handleEntryClick,
+          getEventData: this.getEventData
         })}
       </div>
     );
