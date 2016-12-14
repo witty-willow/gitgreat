@@ -1,5 +1,6 @@
 import React from 'react';
 import Nav from './Nav.jsx';
+import {browserHistory} from 'react-router';
 //Parent App within createEvent.html
 //Allows users to create new events
 class CreateEventApp extends React.Component {
@@ -29,17 +30,21 @@ class CreateEventApp extends React.Component {
   handleEventSubmit(event) {
     //sends a post request with the event data to the server, which will enter the event into
     //the eventTable
-    var successHandler = function() {
-      $('#msg').text('event successfully posted');
-    };
-    $.ajax({
-      method: 'POST',
-      url: '/eventTable',
-      contentType: 'application/json',
-      data: JSON.stringify(this.state),
-      success: successHandler.bind(this)
-    });
-    event.preventDefault();
+    var now = new Date();
+    var eventDate = new Date(this.state.when);
+    if(eventDate > now) {
+      $.ajax({
+        method: 'POST',
+        url: '/eventTable',
+        contentType: 'application/json',
+        data: JSON.stringify(this.state),
+        success: browserHistory.push('/')
+      });
+      event.preventDefault();
+    } else {
+      $('#msg').text('event is in the past');
+      event.preventDefault();
+    }
   }
   render() {
     return (
