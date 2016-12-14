@@ -11,11 +11,9 @@ class App extends React.Component {
     super(props);
     this.state = {
       eventList: null,
-      page: 'homepage',
       featuredEvent: null
     };
     this.handleEntryClick = this.handleEntryClick.bind(this);
-    this.handleCreateClick = this.handleCreateClick.bind(this);
   }
   componentDidMount() {
     //sends a get request to the server to populate the eventList array in this component's state,
@@ -38,35 +36,10 @@ class App extends React.Component {
     });
   }
 
-  handleCreateClick(event) {
-    this.setState({
-      page: 'createEvent'
-    });
-  }
-
   render() {
-    var view;
-    //view logic: if an event has been clicked on, then the page should view
-    //the eventDetails page--the EventPlanning component. Otherwise, show the
-    //homepage--the EventList component.
-    if (this.state.page === 'homepage') {
-      view =
-        (<div>
-          <EventList
-            eventData={this.state.eventList}
-            handleEntryClick={this.handleEntryClick}
-          />;
-        </div>);
-    } else if (this.state.page === 'eventDetails') {
-      view = <EventPlanning featuredEvent={this.state.featuredEvent}/>;
-    } else if (this.state.page === 'createEvent') {
-      view = <CreateEventApp />
-    }
-
     return (
       <div>
-        <Nav handleCreateClick={this.handleCreateClick}/>
-        {view}
+        <Nav />
       </div>
     );
   }

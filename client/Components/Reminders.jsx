@@ -111,4 +111,4 @@ class Reminders extends React.Component {
   }
 }
 
-window.Reminders = Reminders;
+module.exports = Reminders;

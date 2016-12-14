@@ -44,7 +44,6 @@ class CreateEventApp extends React.Component {
   render() {
     return (
       <div>
-        <Nav />
         <div className="featureBody" id="createEvent">
           <form onSubmit={this.handleEventSubmit}>
             <p><label>
