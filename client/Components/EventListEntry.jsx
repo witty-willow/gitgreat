@@ -7,4 +7,4 @@ var EventListEntry = (props) => (
   </div>
 );
 
-window.EventListEntry = EventListEntry;
+module.exports = EventListEntry;

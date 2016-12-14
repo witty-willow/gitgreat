@@ -1,6 +1,7 @@
 //Child component within the HomepageApp and the CreateEventApp to toggle
 //between the two App pages.
-import {Link} from 'react-router'
+import React from 'react';
+import {Link} from 'react-router';
 
 var Nav = ({handleCreateClick}) => (
   <div className="nav">
