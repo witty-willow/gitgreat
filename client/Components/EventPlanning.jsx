@@ -11,34 +11,46 @@ class EventPlanning extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      tab: false
+      currentTab: 'what-to-bring'
     };
 
     this.changeTabDisplay = this.changeTabDisplay.bind(this);
   }
 
   changeTabDisplay(e) {
+    console.log(this.props.featuredEvent);
+    console.log(e.target.value);
     this.setState({
-      tab: e.target.value
+      currentTab: e.target.value
     });
   }
 
   render() {
-    var view;
-    if (this.state.tab === 'whatToBringBtn') {
-      view = <WhatToBring featuredEvent={this.props.featuredEvent}/>;
-    } else if (this.state.tab === 'activitiesBtn') {
-      view = <Activities />;
-    } else if (this.state.tab === 'reminderBtn') {
-      view = <Reminders featuredEvent={this.props.featuredEvent}/>;
-    } else if (this.state.tab === 'photosBtn') {
-     view = <Photos uploadFile={this.uploadFile} />;
-    }
+    // var view;
+    // if (this.state.tab === 'whatToBringBtn') {
+    //   view = <WhatToBring featuredEvent={this.props.featuredEvent}/>;
+    // } else if (this.state.tab === 'activitiesBtn') {
+    //   view = <Activities />;
+    // } else if (this.state.tab === 'reminderBtn') {
+    //   view = <Reminders featuredEvent={this.props.featuredEvent}/>;
+    // } else if (this.state.tab === 'photosBtn') {
+    //  view = <Photos uploadFile={this.uploadFile} />;
+    // }
     return (
       <div>
-        <h1 className="eventHeader">{this.props.featuredEvent.name} | {this.props.featuredEvent.where} | {this.props.featuredEvent.when}</h1>
-        <FeatureNavigation changeDisplay={this.changeTabDisplay} />
-        {this.props.children}
+      <FeatureNavigation changeDisplay={this.changeTabDisplay} />
+
+      <h1 className="eventHeader">
+      {this.props.featuredEvent.name} | {this.props.featuredEvent.where} | {this.props.featuredEvent.when}
+      </h1>
+
+      {
+        this.props.children && 
+        React.cloneElement(this.props.children, {
+            featuredEvent: this.props.featuredEvent
+        })
+      }
+
       </div>
     );
   }
