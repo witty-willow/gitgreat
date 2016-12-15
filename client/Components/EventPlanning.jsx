@@ -42,7 +42,7 @@ class EventPlanning extends React.Component {
       <FeatureNavigation changeDisplay={this.changeTabDisplay} />
 
       <h1 className="eventHeader">
-      {this.props.featuredEvent.name} | {this.props.featuredEvent.where} | {moment(this.props.featuredEvent.when).calendar()}
+      {this.props.featuredEvent.name} | {this.props.featuredEvent.where} | {moment(this.props.featuredEvent.when).utcOffset(0).calendar()}
       </h1>
 
       {

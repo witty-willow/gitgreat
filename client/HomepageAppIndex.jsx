@@ -41,9 +41,9 @@ ReactDOM.render((
       <Route path='/register' component={RegistrationPage} />
       <AuthenticatedRoute path="create" component={CreateEventApp} />
       <AuthenticatedRoute path="planning" component={EventPlanning} /> 
-        <Route path="reminders" component={Reminders} />
-        <Route path="photos" component={Photos} />
-        <Route path="what-to-bring" component={WhatToBring} />
+        <Route path="planning/reminders" component={Reminders} />
+        <Route path="planning/photos" component={Photos} />
+        <Route path="planning/what-to-bring" component={WhatToBring} />
     </HomeRoute>
   </Router>
   ), document.getElementById('HomepageApp') 
