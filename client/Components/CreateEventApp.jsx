@@ -10,7 +10,7 @@ class CreateEventApp extends React.Component {
     this.state = {
       name: '',
       when: '',
-      where: ''
+      location: {}
     };
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
@@ -25,7 +25,16 @@ class CreateEventApp extends React.Component {
     this.setState({when: event.target.value});
   }
   handleLocChange(event) {
-    this.setState({where: event.target.value});
+    this.setState({
+      location: {
+        label: event.label,
+        address: event.gmaps.formatted_address,
+        latitude: event.location.lat,
+        longitude: event.location.lng,
+        placeID: event.placeId,
+        categories: event.gmaps.types
+      }
+    });
   }
   handleEventSubmit(event) {
     //sends a post request with the event data to the server, which will enter the event into
@@ -67,11 +76,8 @@ class CreateEventApp extends React.Component {
             </label></p>
             <p><label>
               Location:
-              {/*<input type="text" name="location"
-                              value={this.state.where}
-                              onChange={this.handleLocChange}/>*/}
             </label></p>
-            <Geosuggest />
+            <Geosuggest onSuggestSelect={this.handleLocChange}/>
             <input type="submit" value="Submit" />
           </form>
         </div>

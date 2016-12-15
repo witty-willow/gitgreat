@@ -21,11 +21,35 @@ var EventTable = sequelize.define('events', {
   name: {
     type: Sequelize.STRING
   },
-  where: {
-    type: Sequelize.STRING
-  },
   when: {
     type: Sequelize.DATE
+  }
+});
+
+var LocationTable = sequelize.define('location', {
+  label: {
+    type: Sequelize.STRING
+  },
+  address: {
+    type: Sequelize.STRING
+  },
+  latitude: {
+    type: Sequelize.INTEGER
+  },
+  longitude: {
+    type: Sequelize.INTEGER
+  },
+  placeID: {
+    type: Sequelize.STRING
+  },
+  categories: {
+    type: Sequelize.STRING,
+    get: function() {
+        return JSON.parse(this.getDataValue('categories'));
+    },
+    set: function(val) {
+        return this.setDataValue('categories', JSON.stringify(val));
+    }
   }
 });
 
@@ -78,6 +102,7 @@ var UsersTable = sequelize.define('users', {
 //Create associations such that ItemListTable and ReminderTable contain eventId
 ItemListTable.belongsTo(EventTable);
 ReminderTable.belongsTo(EventTable);
+LocationTable.belongsTo(EventTable);
 UsersTable.belongsToMany(EventTable, {through: 'UsersTableEventTable'});
 EventTable.belongsToMany(UsersTable, {through: 'UsersTableEventTable'});
 
@@ -97,6 +122,7 @@ sequelize.sync()
 
 module.exports.PhotosTable = PhotosTable;
 module.exports.EventTable = EventTable;
-module.exports.ItemListTable = ItemListTable;    
+module.exports.ItemListTable = ItemListTable;
 module.exports.ReminderTable = ReminderTable;
 module.exports.UsersTable = UsersTable;
+module.exports.LocationTable = LocationTable;
