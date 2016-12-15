@@ -34,10 +34,10 @@ var LocationTable = sequelize.define('location', {
     type: Sequelize.STRING
   },
   latitude: {
-    type: Sequelize.INTEGER
+    type: Sequelize.STRING
   },
   longitude: {
-    type: Sequelize.INTEGER
+    type: Sequelize.STRING
   },
   placeID: {
     type: Sequelize.STRING
@@ -49,6 +49,13 @@ var LocationTable = sequelize.define('location', {
     },
     set: function(val) {
         return this.setDataValue('categories', JSON.stringify(val));
+    }
+  },
+  eventId: {
+    type: Sequelize.INTEGER,
+    references: {
+      model: EventTable,
+      key: 'id'
     }
   }
 });
@@ -103,6 +110,7 @@ var UsersTable = sequelize.define('users', {
 ItemListTable.belongsTo(EventTable);
 ReminderTable.belongsTo(EventTable);
 LocationTable.belongsTo(EventTable);
+EventTable.hasOne(LocationTable);
 UsersTable.belongsToMany(EventTable, {through: 'UsersTableEventTable'});
 EventTable.belongsToMany(UsersTable, {through: 'UsersTableEventTable'});
 

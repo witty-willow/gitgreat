@@ -47,15 +47,14 @@ class CreateEventApp extends React.Component {
         url: '/eventTable',
         contentType: 'application/json',
         data: JSON.stringify(this.state),
-        success: function() {
+        success: function(event) {
           this.props.getEventData(this.state);
         }.bind(this)
       });
-      event.preventDefault();
     } else {
       $('#msg').text('event is in the past');
-      event.preventDefault();
     }
+    event.preventDefault();
   }
   render() {
     return (
