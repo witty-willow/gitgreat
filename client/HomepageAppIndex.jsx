@@ -14,7 +14,7 @@ ReactStormpath.init({
 
     endpoints: {
     baseUri: 'localhost:3000', // E.g. https://api.example.com
-    register: '/register'
+    register: '/register',
     create: '/create',
     login: '/login',
     list: '/list',
@@ -31,7 +31,7 @@ ReactStormpath.init({
 //Renders the HomepageApp component on homepage.html
 ReactDOM.render((
   <Router history={browserHistory}>
-    <HomeRoute path="/" component={HomepageApp}> 
+    <HomeRoute path="/" component={HomepageApp} /> 
       <IndexRoute component={EventList} />
       <LoginRoute path='/login' component={LoginPage} />
       <Route path='/register' component={RegistrationPage} />
@@ -40,12 +40,10 @@ ReactDOM.render((
       </AuthenticatedRoute>
       <AuthenticatedRoute path="create" component={CreateEventApp} />
       <AuthenticatedRoute path="list" component={EventList}/> 
-      <AuthenticatedRoute path="planning" component={EventPlanning}> 
+      <AuthenticatedRoute path="planning" component={EventPlanning} /> 
         <AuthenticatedRoute path="reminders" component={Reminders} />
         <AuthenticatedRoute path="photos" component={Photos} />
         <AuthenticatedRoute path="what-to-bring" component={WhatToBring} />
-      </Route>
-    </Route>
   </Router>
   ), document.getElementById('HomepageApp') 
 );
