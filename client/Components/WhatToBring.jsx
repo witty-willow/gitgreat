@@ -11,7 +11,8 @@ class WhatToBring extends React.Component {
       itemList: [{item: 'mashed potatoes', cost: '20', owner: 'Jenn'}],
       currentItem: null,
       currentOwner: null,
-      currentCost: null
+      currentCost: null,
+      messages: []
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleItemChange = this.handleItemChange.bind(this);
@@ -80,10 +81,9 @@ class WhatToBring extends React.Component {
   render() {
 
     // A promise that returns an object with each user and how much they spent
-    this.countUniqueUsers().then(function(data){
-      var ledger = calcAmountOwed(data);
+    this.countUniqueUsers().then(function(data) {
+      var ledger = helpers.calcAmountOwed(data);
 
-      var messages = [];
       var payees = [];
       var payers = [];
 
@@ -94,25 +94,44 @@ class WhatToBring extends React.Component {
           payees.push(attendee);
         }
       })
-      
-      // while (payees.length)
-      // payee 0 is up
-      // currentPayee = payee
+      var i = 0;
+      var j = 0;
 
-        // if payer.amountowed + payee.amountowed < 0
-          // payee amount owed += payer.amountowed
-          // messages.push(payer 'owes' payee payer.amountowed )
+      while (i < payees.length && j < payers.length) {
+        var payee = payees[i];
+        var payer = payers[j];
 
-        // if payer.amountowed + payee.amountowed === 0
-          // payee amount owed += payer.amountowed
-          // messages.push(payer 'owes' payee payer.amountowed )
+        if (payer.amountOwed + payee.amountOwed < 0) {
+          // Payee is owed more money than the payer owes
+          // So credit all of the payers debt toward the payee and 
+          // reduce how much the payee is owed accordingly
+          var amountToPay = payer.amountOwed;
+          payer.amountOwed = 0;
+          payee.amountOwed += amountToPay;
+          this.state.messages.push(payer.name + ' owes ' + payee.name + ' $' + amountToPay);
+          j++;
 
-        // if payer.amountowed + payee.amountowed > 0
-          // payer amount owed += payee.amountowed
-          // messages.push(payer 'owes' payee negative payee.amountowed)
+        } else if (payer.amountOwed + payee.amountOwed > 0) {
+          // Payer owes more money than the payee is owed
+          var amountToPay = payee.amountOwed;
+          payee.amountOwed = 0;
+          payer.amountOwed += amountToPay
+          this.state.messages.push(payer.name + ' owes ' + payee.name + ' $' + Math.abs(amountToPay));
+          i++;
 
+        } else {
+          // payer.amountOwed + payee.amountOwed === 0
+          var amountToPay = payer.amountOwed;
+          payee.amountOwed = 0;
+          payer.amountOwed = 0;
+          this.state.messages.push(payer.name + ' owes ' + payee.name + ' $' + amountToPay);
+          j++;
+          i++;
+        }
+      }
+      console.log('messages', this.state.messages);
 
-    });
+    }.bind(this));
 
     return (
       <div>
@@ -151,6 +170,22 @@ class WhatToBring extends React.Component {
                 <th>{item.owner}</th>
                 <th>{item.item}</th>
                 <th>{'$' + item.cost}</th>
+              </tr>
+            )}
+          </tbody>
+        </table>
+        <table className="bringTable">
+          <thead>
+            <tr>
+              <th>
+                Ledger
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.state.messages.map( (message, index) =>
+              <tr key={index}>
+                <th>{message}</th>
               </tr>
             )}
           </tbody>
