@@ -6,22 +6,45 @@ import EventPlanning from './Components/EventPlanning.jsx';
 import Reminders from './Components/Reminders.jsx';
 import Photos from './Components/Photos.jsx';
 import WhatToBring from './Components/WhatToBring.jsx';
-import {Router, Route, Link, browserHistory, IndexRoute} from 'react-router';
+import {Route, Link, browserHistory, IndexRoute} from 'react-router';
 import React from 'react';
+import ReactStormpath, { Router, AuthenticatedRoute, LoginLink, HomeRoute, LoginRoute } from 'react-stormpath';
+import LoginPage from './Components/LoginPage.jsx'
+import RegistrationPage from './Components/RegistrationPage.jsx'
 
-//Renders the HomepageApp component on homepage.html
+ReactStormpath.init({
+
+  //   endpoints: {
+  //   baseUri: 'http://localhost:3000', // E.g. https://api.example.com
+  //   register: '/register',
+  //   create: '/create',
+  //   login: '/login',
+  //   list: '/list',
+  //   planning: '/planning',
+  //   reminders: '/reminders',
+  //   photos: '/photos',
+  //   'what-to-bring': '/what-to-bring'
+  // }
+  // // See docs for available configuration options.
+});
+//TENANT -- copper-bow
+//MIGHT NEED TO ACCESS USER STATE IN COMPONENTS
+
+//Renders the HomepageApp component on index.html
 ReactDOM.render((
   <Router history={browserHistory}>
-    <Route path="/" component={HomepageApp}> 
-      <IndexRoute component={EventList} />
-      <Route path="create" component={CreateEventApp} />
-      <Route path="list" component={EventList}/> 
-      <Route path="planning" component={EventPlanning}> 
+    <HomeRoute path="/" component={HomepageApp}>
+      <AuthenticatedRoute>
+        <IndexRoute component={EventList} />
+      </AuthenticatedRoute>
+      <LoginRoute path='/login' component={LoginPage} />
+      <Route path='/register' component={RegistrationPage} />
+      <AuthenticatedRoute path="create" component={CreateEventApp} />
+      <AuthenticatedRoute path="planning" component={EventPlanning} /> 
         <Route path="reminders" component={Reminders} />
         <Route path="photos" component={Photos} />
         <Route path="what-to-bring" component={WhatToBring} />
-      </Route>
-    </Route>
+    </HomeRoute>
   </Router>
   ), document.getElementById('HomepageApp') 
 );

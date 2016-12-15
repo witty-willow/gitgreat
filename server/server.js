@@ -1,6 +1,7 @@
 const express = require('express');
 const parser = require('body-parser');
 const url = require('url');
+var stormpath = require('express-stormpath');
 
 const db = require('../db');
 const dbModels = require('../db/index.js');
@@ -20,10 +21,19 @@ cloudinary.config({
 const app = express();
 app.use(parser.json());
 
+//TENANT -- copper-bow
+
 //serve public folder static files
 app.use(express.static(path.join(__dirname, '..', '/public')));
 //serve node_modules via the '/script' virtual file path
 app.use('/scripts', express.static('../node_modules'));
+
+app.use(stormpath.init(app, {
+  website: true,
+   web: {
+    produces: ['application/json']
+  }
+}));
 
 app.get('/', function(req, res, next) {
   res.sendFile(path.join(__dirname, '../public/homepage.html'));
@@ -156,8 +166,10 @@ app.get('*', function(req, res) {
   res.sendFile(path.join(__dirname, '..', '/public/homepage.html'));
 })
 
-app.listen(3000, function() {
-  console.log('Server is listening on port 3000');
-});
+app.on('stormpath.ready', function () {
+  app.listen(3000, function() {
+    console.log('Server is listening on port 3000');
+  });
+})
 
 module.exports = app;
