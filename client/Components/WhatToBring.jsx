@@ -1,4 +1,6 @@
 import React from 'react';
+import helpers from './WhatToBringHelpers.jsx';
+import Promise from 'bluebird';
 
 //Child component within the Event Planning component
 //Allows users to create a list of items that need to be brought to an event;
@@ -16,13 +18,15 @@ class WhatToBring extends React.Component {
     this.handleCostChange = this.handleCostChange.bind(this);
     this.handleOwnerChange = this.handleOwnerChange.bind(this);
     this.fetchItems = this.fetchItems.bind(this);
+
+    this.countUniqueUsers = helpers.countUniqueUsers.bind(this);
   }
   componentDidMount() {
     this.fetchItems();
   }
 
   fetchItems() {
-      //The event name is passed along to the server via query parameters
+    //The event name is passed along to the server via query parameters
     //so that we can display the itemlist associated with a specific event
     var eventParam = this.props.featuredEvent.name.split(' ').join('_');
     var successHandler = function(data) {
@@ -74,6 +78,42 @@ class WhatToBring extends React.Component {
   }
 
   render() {
+
+    // A promise that returns an object with each user and how much they spent
+    this.countUniqueUsers().then(function(data){
+      var ledger = calcAmountOwed(data);
+
+      var messages = [];
+      var payees = [];
+      var payers = [];
+
+      ledger.forEach(function(attendee) {
+        if (attendee.amountOwed > 0) {
+          payers.push(attendee);
+        } else if (attendee.amountOwed < 0) {
+          payees.push(attendee);
+        }
+      })
+      
+      // while (payees.length)
+      // payee 0 is up
+      // currentPayee = payee
+
+        // if payer.amountowed + payee.amountowed < 0
+          // payee amount owed += payer.amountowed
+          // messages.push(payer 'owes' payee payer.amountowed )
+
+        // if payer.amountowed + payee.amountowed === 0
+          // payee amount owed += payer.amountowed
+          // messages.push(payer 'owes' payee payer.amountowed )
+
+        // if payer.amountowed + payee.amountowed > 0
+          // payer amount owed += payee.amountowed
+          // messages.push(payer 'owes' payee negative payee.amountowed)
+
+
+    });
+
     return (
       <div>
         <form className="bringForm" onSubmit={this.handleSubmit}>
@@ -110,7 +150,7 @@ class WhatToBring extends React.Component {
               <tr key={index}>
                 <th>{item.owner}</th>
                 <th>{item.item}</th>
-                <th>{item.cost}</th>
+                <th>{'$' + item.cost}</th>
               </tr>
             )}
           </tbody>
