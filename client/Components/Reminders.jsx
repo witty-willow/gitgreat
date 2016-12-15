@@ -30,7 +30,7 @@ class Reminders extends React.Component {
     //so that we can display reminders associated with a specific event.
     var eventParam = this.props.featuredEvent.name.split(' ').join('_');
     var successHandler = function(data) {
-      if(data.length !== this.state.reminders.length) {
+      if (data.length !== this.state.reminders.length) {
         this.setState({reminders: data}); 
       }
     };
@@ -54,10 +54,17 @@ class Reminders extends React.Component {
   handleReminderSubmit(event) {
     //The event name is passed along to the server via query parameters
     //so that we can submit reminders associated with a specific event.
-    var successHandler = function() {
-      $('#msg').text('reminder successfully posted');
-    };
-    console.log(this.state);
+
+    // var successHandler = function() {
+    //   console.log('test');
+    //   this.state.reminders.push(event);
+    //   this.setState({reminders: this.state.reminders});
+    // };
+
+    var successHandler = function(){
+      this.fetchReminders();
+    }
+
     var eventParam = this.props.featuredEvent.name.split(' ').join('_');
     $.ajax({
       method: 'POST',
