@@ -8,12 +8,14 @@ import Photos from './Components/Photos.jsx';
 import WhatToBring from './Components/WhatToBring.jsx';
 import {Route, Link, browserHistory, IndexRoute} from 'react-router';
 import React from 'react';
-import ReactStormpath, { Router, AuthenticatedRoute, LoginLink } from 'react-stormpath';
+import ReactStormpath, { Router, AuthenticatedRoute, LoginLink, HomeRoute, LoginRoute } from 'react-stormpath';
+import LoginPage from './Components/LoginPage.jsx'
+import RegistrationPage from './Components/RegistrationPage.jsx'
 
 ReactStormpath.init({
 
     endpoints: {
-    baseUri: 'localhost:3000', // E.g. https://api.example.com
+    baseUri: 'http://localhost:3000', // E.g. https://api.example.com
     register: '/register',
     create: '/create',
     login: '/login',
@@ -28,18 +30,18 @@ ReactStormpath.init({
 //TENANT -- copper-bow
 //MIGHT NEED TO ACCESS USER STATE IN COMPONENTS
 
-//Renders the HomepageApp component on homepage.html
+//Renders the HomepageApp component on index.html
 ReactDOM.render((
   <Router history={browserHistory}>
     <HomeRoute path="/" component={HomepageApp} /> 
-      <IndexRoute component={EventList} />
+      { /*<IndexRoute component={EventList} /> */}
       <LoginRoute path='/login' component={LoginPage} />
       <Route path='/register' component={RegistrationPage} />
       <AuthenticatedRoute>
         <HomeRoute path='/list' component={EventList} />
       </AuthenticatedRoute>
       <AuthenticatedRoute path="create" component={CreateEventApp} />
-      <AuthenticatedRoute path="list" component={EventList}/> 
+      <AuthenticatedRoute path="list" component={EventList}/>
       <AuthenticatedRoute path="planning" component={EventPlanning} /> 
         <AuthenticatedRoute path="reminders" component={Reminders} />
         <AuthenticatedRoute path="photos" component={Photos} />
