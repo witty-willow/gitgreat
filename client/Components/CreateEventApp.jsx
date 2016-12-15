@@ -1,6 +1,7 @@
 import React from 'react';
 import Nav from './Nav.jsx';
 import {browserHistory} from 'react-router';
+import Geosuggest from 'react-geosuggest';
 //Parent App within createEvent.html
 //Allows users to create new events
 class CreateEventApp extends React.Component {
@@ -66,10 +67,11 @@ class CreateEventApp extends React.Component {
             </label></p>
             <p><label>
               Location:
-              <input type="text" name="location"
-                value={this.state.where}
-                onChange={this.handleLocChange}/>
+              {/*<input type="text" name="location"
+                              value={this.state.where}
+                              onChange={this.handleLocChange}/>*/}
             </label></p>
+            <Geosuggest />
             <input type="submit" value="Submit" />
           </form>
         </div>
