@@ -4,6 +4,7 @@ import Activities from './Activities.jsx';
 import Reminders from './Reminders.jsx';
 import Photos from './Photos.jsx';
 import FeatureNavigation from './FeatureNavigation.jsx';
+import moment from 'moment';
 
 //Child component contained within HomepageApp
 //Contains the event planning navigation bar
@@ -41,7 +42,7 @@ class EventPlanning extends React.Component {
       <FeatureNavigation changeDisplay={this.changeTabDisplay} />
 
       <h1 className="eventHeader">
-      {this.props.featuredEvent.name} | {this.props.featuredEvent.where} | {this.props.featuredEvent.when}
+      {this.props.featuredEvent.name} | {this.props.featuredEvent.where} | {moment(this.props.featuredEvent.when).calendar()}
       </h1>
 
       {

@@ -129,6 +129,12 @@ label {
   margin-left: 30px;
 }
 
+.remindForm {
+  position: relative;
+  text-align: center;
+  margin-top: 50px;
+}
+
 table {
   position: relative;
   top: 20px;

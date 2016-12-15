@@ -151,7 +151,7 @@ app.get('/displayImages', function(req, res) {
 });
 
 app.get('*', function(req, res) {
-  res.sendFile(path.join(__dirname, '../public/homepage.html'));
+  res.sendFile(path.join(__dirname, '..', '/public/homepage.html'));
 })
 
 app.listen(3000, function() {
