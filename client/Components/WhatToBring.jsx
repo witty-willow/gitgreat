@@ -80,8 +80,8 @@ class WhatToBring extends React.Component {
   render() {
 
     // A promise that returns an object with each user and how much they spent
-    this.countUniqueUsers().then(function(data){
-      var ledger = calcAmountOwed(data);
+    this.countUniqueUsers().then(function(data) {
+      var ledger = helpers.calcAmountOwed(data);
 
       var messages = [];
       var payees = [];
@@ -94,22 +94,39 @@ class WhatToBring extends React.Component {
           payees.push(attendee);
         }
       })
+
+      console.log('payees', payees);
+      console.log('payers', payers);
       
-      // while (payees.length)
-      // payee 0 is up
-      // currentPayee = payee
 
-        // if payer.amountowed + payee.amountowed < 0
-          // payee amount owed += payer.amountowed
-          // messages.push(payer 'owes' payee payer.amountowed )
 
-        // if payer.amountowed + payee.amountowed === 0
-          // payee amount owed += payer.amountowed
-          // messages.push(payer 'owes' payee payer.amountowed )
+      var i = 0;
+      var j = 0;
 
-        // if payer.amountowed + payee.amountowed > 0
-          // payer amount owed += payee.amountowed
-          // messages.push(payer 'owes' payee negative payee.amountowed)
+      while (i < payees.length && j < payers.length) {
+        var payee = payees[i];
+        var payer = payers[j];
+
+        if (payer.amountOwed + payee.amountOwed < 0) {
+          payee.amountOwed += payer.amountOwed;
+          messages.push(payer.name + ' owes ' + payee.name + ' ' + payer.amountOwed);
+          j++;
+
+        } else if (payer.amountOwed + payee.amountOwed > 0) {
+          payer.amountOwed += payee.amountOwed;
+          messages.push(payer.name + ' owes ' + payee.name + ' ' + Math.abs(payer.amountOwed));
+          i++;
+
+        } else {
+          // payer.amountOwed + payee.amountOwed === 0
+          payee.amountOwed += payer.amountOwed
+          messages.push(payer.name + ' owes ' + payee.name + ' ' + payer.amountOwed);
+          j++;
+          i++;
+        }
+      }
+
+      console.log('messages', messages);
 
 
     });
