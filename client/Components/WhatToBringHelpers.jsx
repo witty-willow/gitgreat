@@ -46,7 +46,8 @@ var calcAmountOwed = function(data) {
   }
 
   var eachPersonOwes = totalAmountSpent / expenseTracker.length;
-
+  console.log('each person owes: ' + eachPersonOwes);
+  
   expenseTracker.forEach(function(person) {
     person.amountOwed = eachPersonOwes - person.amountSpent;
 
