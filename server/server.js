@@ -1,6 +1,7 @@
 const express = require('express');
 const parser = require('body-parser');
 const url = require('url');
+var stormpath = require('express-stormpath');
 
 const db = require('../db');
 const dbModels = require('../db/index.js');
@@ -19,6 +20,14 @@ cloudinary.config({
 
 const app = express();
 app.use(parser.json());
+
+app.use(stormpath.init(app, {
+  web: {
+    produces: ['application/json']
+  }
+}));
+
+//TENANT -- copper-bow
 
 //serve public folder static files
 app.use(express.static(path.join(__dirname, '..', '/public')));
