@@ -59,28 +59,8 @@ class WhatToBring extends React.Component {
       contentType: 'application/json',
       success: successHandler.bind(this)
     });
-    event.preventDefault();
-  }
 
-  handleItemChange(event) {
-    this.setState({
-      currentItem: event.target.value
-    });
-  }
-  handleOwnerChange(event) {
-    this.setState({
-      currentOwner: event.target.value
-    });
-  }
-  handleCostChange(event) {
-    this.setState({
-      currentCost: event.target.value
-    });
-  }
-
-  render() {
-
-    // A promise that returns an object with each user and how much they spent
+    this.setState({messages: []});
     this.countUniqueUsers().then(function(data) {
       var ledger = helpers.calcAmountOwed(data);
 
@@ -132,6 +112,29 @@ class WhatToBring extends React.Component {
       console.log('messages', this.state.messages);
 
     }.bind(this));
+    event.preventDefault();
+
+  }
+
+  handleItemChange(event) {
+    this.setState({
+      currentItem: event.target.value
+    });
+  }
+  handleOwnerChange(event) {
+    this.setState({
+      currentOwner: event.target.value
+    });
+  }
+  handleCostChange(event) {
+    this.setState({
+      currentCost: event.target.value
+    });
+  }
+
+  render() {
+
+    // A promise that returns an object with each user and how much they spent
 
     return (
       <div>
