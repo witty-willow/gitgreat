@@ -85,6 +85,8 @@ app.get('/itemList', function(req, res, next) {
 
 app.post('/reminders', function(req, res, next) {
   var eventName = url.parse(req.url).query.slice(10).split('_').join(' ');
+  console.log(eventName);
+  
   dbModels.EventTable.findOne({where: {name: eventName}})
     .then(function(event) {
       var eventId = event.id;
