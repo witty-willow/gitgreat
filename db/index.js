@@ -49,7 +49,7 @@ var PhotosTable = sequelize.define('photos', {
 
 var ReminderTable = sequelize.define('reminders', {
   phoneNumber: {
-    type: Sequelize.INTEGER
+    type: Sequelize.STRING
   },
   msg: {
     type: Sequelize.STRING

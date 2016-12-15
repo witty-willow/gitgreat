@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 //Child component within the Event Planning component
 //Allows users to send a reminder for purposes of event planning
 class Reminders extends React.Component {
@@ -20,12 +21,18 @@ class Reminders extends React.Component {
     this.fetchReminders();
   }
 
+  componentDidUpdate() {
+    this.fetchReminders();
+  }
+
   fetchReminders() {
     //The event name is passed along to the server via query parameters
     //so that we can display reminders associated with a specific event.
     var eventParam = this.props.featuredEvent.name.split(' ').join('_');
     var successHandler = function(data) {
-      this.setState({reminders: data});
+      if(data.length !== this.state.reminders.length) {
+        this.setState({reminders: data}); 
+      }
     };
     $.ajax({
       method: 'GET',
@@ -50,13 +57,14 @@ class Reminders extends React.Component {
     var successHandler = function() {
       $('#msg').text('reminder successfully posted');
     };
+    console.log(this.state);
     var eventParam = this.props.featuredEvent.name.split(' ').join('_');
     $.ajax({
       method: 'POST',
       url: '/reminders?eventName=' + eventParam,
       contentType: 'application/json',
       data: JSON.stringify(this.state),
-      success: successHandler.bind(this)
+      success: successHandler.bind(this),
     });
     event.preventDefault();
   }
@@ -64,31 +72,33 @@ class Reminders extends React.Component {
   render() {
     return (
       <div>
-        <h2>Reminder</h2>
-        <form onSubmit={this.handleReminderSubmit}>
-          <label>
-            Phone Number:
-            <input type="text" name="phoneNumber"
-              value={this.state.phoneNumber}
-              onChange={this.handlePhoneNumberChange}/>
-          </label>
-          <label>
-            When:
-            <input type="datetime-local" name="when"
-              value={this.state.when}
-              onChange={this.handleWhenChange}/>
-          </label>
-          <label>
-            Msg:
-            <input type="text" name="msg"
-              value={this.state.msg}
-              onChange={this.handleMsgChange}/>
-          </label>
-          <input type="submit" value="Submit" />
-        </form>
+        <div className='remindForm'>
+          <h2>Reminders</h2>
+          <form onSubmit={this.handleReminderSubmit}>
+            <label>
+              Phone Number:
+              <input type="text" name="phoneNumber"
+                value={this.state.phoneNumber}
+                onChange={this.handlePhoneNumberChange}/>
+            </label>
+            <label>
+              When:
+              <input type="datetime-local" name="when"
+                value={this.state.when}
+                onChange={this.handleWhenChange}/>
+            </label>
+            <label>
+              Msg:
+              <input type="text" name="msg"
+                value={this.state.msg}
+                onChange={this.handleMsgChange}/>
+            </label>
+            <input type="submit" value="Submit" />
+          </form>
+        </div>  
         <div id='msg'></div>
         <table>
-          <caption>ReminderList</caption>
+          <caption>Reminder List</caption>
           <thead>
             <tr>
               <th>PhoneNumber</th>
@@ -100,7 +110,7 @@ class Reminders extends React.Component {
             {this.state.reminders.map( (reminder, index) =>
               <tr key={index}>
                 <th>{reminder.phoneNumber}</th>
-                <th>{reminder.when}</th>
+                <th>{moment(reminder.when).calendar()}</th>
                 <th>{reminder.msg}</th>
               </tr>
             )}
