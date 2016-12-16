@@ -5,6 +5,7 @@ import EventList from './Components/EventList.jsx';
 import EventPlanning from './Components/EventPlanning.jsx';
 import Reminders from './Components/Reminders.jsx';
 import Photos from './Components/Photos.jsx';
+import Info from './Components/Info.jsx';
 import WhatToBring from './Components/WhatToBring.jsx';
 import {Route, Link, browserHistory, IndexRoute} from 'react-router';
 import React from 'react';
@@ -56,6 +57,7 @@ ReactDOM.render((
       <Route path="create" component={CreateEventApp} />
       <Route path="list" component={EventList}/> 
       <Route path="planning" component={EventPlanning}> 
+        <Route path="info" component={Info} /> 
         <Route path="reminders" component={Reminders} />
         <Route path="photos" component={Photos} />
         <Route path="what-to-bring" component={WhatToBring} />

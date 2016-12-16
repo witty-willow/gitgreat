@@ -125,7 +125,7 @@ sequelize
 
 
 
-sequelize.sync({force: true})
+sequelize.sync()
   .then(function(err) {console.log('It worked!')}, function(err) {console.log('Error occured', err)});
 
 module.exports.PhotosTable = PhotosTable;
