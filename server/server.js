@@ -2,7 +2,6 @@ const express = require('express');
 const parser = require('body-parser');
 const url = require('url');
 var stormpath = require('express-stormpath');
-var API_KEY = require('./API_KEY.js');
 
 const db = require('../db');
 const dbModels = require('../db/index.js');
@@ -22,8 +21,6 @@ cloudinary.config({
 const app = express();
 app.use(parser.json());
 
-//TENANT -- copper-bow
-
 //serve public folder static files
 app.use(express.static(path.join(__dirname, '..', '/public')));
 //serve node_modules via the '/script' virtual file path
@@ -31,11 +28,11 @@ app.use('/scripts', express.static('../node_modules'));
 
 app.use(stormpath.init(app, {
   apiKey: {
-    id: API_KEY.id,
-    secret: API_KEY.secret
+    id: process.env.STORMPATH_KEY,
+    secret: process.env.STORMPATH_SECRET
   },
   application: {
-    href: API_KEY.href
+    href: process.env.STORMPATH_HREF
   },
   website: true,
    web: {
