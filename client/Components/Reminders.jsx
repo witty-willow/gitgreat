@@ -114,7 +114,7 @@ class Reminders extends React.Component {
             {this.state.reminders.map( (reminder, index) =>
               <tr key={index}>
                 <th>{reminder.phoneNumber}</th>
-                <th>{moment(reminder.when).utcOffset(0).calendar()}</th>
+                <th>{moment(reminder.when).add(8, 'hour').calendar()}</th>
                 <th>{reminder.msg}</th>
               </tr>
             )}
