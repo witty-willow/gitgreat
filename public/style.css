@@ -72,6 +72,11 @@ label {
   margin: 10px;
 }
 
+.deleteBtn {
+  float: right;
+  margin-bottom: 5px;
+}
+
 /* * * * * * * * * *
  *                 *
  *    Event Nav    *
