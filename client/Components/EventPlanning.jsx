@@ -27,31 +27,32 @@ class EventPlanning extends React.Component {
   }
 
   render() {
-    // var view;
-    // if (this.state.tab === 'whatToBringBtn') {
-    //   view = <WhatToBring featuredEvent={this.props.featuredEvent}/>;
-    // } else if (this.state.tab === 'activitiesBtn') {
-    //   view = <Activities />;
-    // } else if (this.state.tab === 'reminderBtn') {
-    //   view = <Reminders featuredEvent={this.props.featuredEvent}/>;
-    // } else if (this.state.tab === 'photosBtn') {
-    //  view = <Photos uploadFile={this.uploadFile} />;
-    // }
+    var mapSrc = `https://www.google.com/maps/embed/v1/place?key=AIzaSyDMwCZtOT8kkwzQuDfktBsoC6hUR5USgRI
+          &q=place_id:${this.props.featuredEvent.location.placeID}`;
+    var styles = {
+      map: {
+        height: "600px",
+        width: "450px",
+        border: "0"
+      }
+    }
     return (
       <div>
       <FeatureNavigation changeDisplay={this.changeTabDisplay} />
 
       <h1 className="eventHeader">
-      {this.props.featuredEvent.name} | {this.props.featuredEvent.where} | {moment(this.props.featuredEvent.when).utcOffset(0).calendar()}
+      {this.props.featuredEvent.name} | {this.props.featuredEvent.location.label.split(',')[0]} | {moment(this.props.featuredEvent.when).utcOffset(0).calendar()}
       </h1>
-
       {
-        this.props.children && 
-        React.cloneElement(this.props.children, {
+        this.props.children && React.cloneElement(this.props.children, {
             featuredEvent: this.props.featuredEvent
         })
       }
-
+      <iframe
+        style={styles.map}
+        frameBorder="0"
+        src={mapSrc} allowFullScreen>
+      </iframe>
       </div>
     );
   }

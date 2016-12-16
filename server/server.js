@@ -48,24 +48,59 @@ app.get('/', function(req, res, next) {
 });
 
 app.post('/eventTable', function(req, res, next) {
+  var location = req.body.location;
   dbModels.EventTable
     .create({
       name: req.body.name,
-      where: req.body.where,
       when: req.body.when
     })
-    .then(function(event) {
-      res.redirect('/');
+    .then(function() {
+      dbModels.EventTable.findOne({where: {name: req.body.name}})
+        .then(function(event) {
+          dbModels.LocationTable
+            .create({
+              label: location.label,
+              address: location.address,
+              latitude: location.latitude,
+              longitude: location.longitude,
+              placeID: location.placeID,
+              categories: location.categories,
+              eventId: event.id
+            })
+            .then(function() {
+              res.sendStatus(200);
+            })
+            .catch(function() {
+              res.sendStatus(400);
+            });
+        })
     })
     .catch(function(err) {
-      console.log('Error: ', err);
+      res.sendStatus(400);
     });
 });
 
 app.get('/eventTable', function(req, res, next) {
-  dbModels.EventTable.findAll({order: [['when', 'DESC']]})
+  dbModels.EventTable.findAll({order: [['when', 'DESC']], include: [dbModels.LocationTable]})
   .then(function(events) {
-    utils.sendResponse(res, 200, 'application/json', events);
+    var result = [];
+    for (var i = 0; i < events.length; i++) {
+      var formattedEvent = {};
+      var event = events[i].dataValues;
+      var location = event.location.dataValues;
+      formattedEvent.name = event.name;
+      formattedEvent.when = event.when;
+      formattedEvent.location = {
+        label: location.label,
+        address: location.address,
+        latitude: parseFloat(location.latitude),
+        longitude: parseFloat(location.longitude),
+        placeID: location.placeID,
+        categories: JSON.parse(location.categories)
+      }
+      result.push(formattedEvent);
+    }
+    utils.sendResponse(res, 200, 'application/json', result);
   });
 });
 
@@ -104,7 +139,7 @@ app.get('/itemList', function(req, res, next) {
 app.post('/reminders', function(req, res, next) {
   var eventName = url.parse(req.url).query.slice(10).split('_').join(' ');
   console.log(eventName);
-  
+
   dbModels.EventTable.findOne({where: {name: eventName}})
     .then(function(event) {
       var eventId = event.id;
