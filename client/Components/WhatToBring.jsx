@@ -1,6 +1,7 @@
 import React from 'react';
 import helpers from './WhatToBringHelpers.jsx';
 import Promise from 'bluebird';
+import {Button} from 'react-bootstrap';
 
 //Child component within the Event Planning component
 //Allows users to create a list of items that need to be brought to an event;
@@ -157,7 +158,9 @@ class WhatToBring extends React.Component {
               onChange={this.handleCostChange}
             />
           </label>
-          <input type="submit" value="Submit" />
+          <Button type="submit" value="Submit">
+            Submit
+          </Button>
         </form>
         <table className="bringTable">
           <thead>

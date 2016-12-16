@@ -1,5 +1,4 @@
 import React from 'react';
-import Nav from './Nav.jsx';
 import {browserHistory} from 'react-router';
 import Geosuggest from 'react-geosuggest';
 //Parent App within createEvent.html
