@@ -27,6 +27,7 @@ class EventList extends React.Component {
         data.forEach((event) => {
           var now = new Date();
           var eventDate = new Date(event.when);
+          eventDate = eventDate.setHours(eventDate.getHours() + 8);
           if (eventDate >= now) {
             upcoming.push(event);
           } else {

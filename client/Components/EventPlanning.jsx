@@ -31,15 +31,16 @@ class EventPlanning extends React.Component {
       <div>
         <FeatureNavigation changeDisplay={this.changeTabDisplay} />
 
-        <h1 className="eventHeader">
-        {this.props.featuredEvent.name} | {this.props.featuredEvent.location.label.split(',')[0]} | {moment(this.props.featuredEvent.when).utcOffset(0).calendar()}
-        </h1>
-        {
-          this.props.children && React.cloneElement(this.props.children, {
-              featuredEvent: this.props.featuredEvent
-          })
-        }
- 
+
+
+      <h1 className="eventHeader">
+      {this.props.featuredEvent.name} | {this.props.featuredEvent.location.label.split(',')[0]} | {moment(this.props.featuredEvent.when).add(8, 'hour').calendar()}
+      </h1>
+      {
+        this.props.children && React.cloneElement(this.props.children, {
+            featuredEvent: this.props.featuredEvent
+        })
+      }
       </div>
     );
   }
