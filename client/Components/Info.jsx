@@ -21,6 +21,10 @@ class Info extends React.Component {
     }
     return (
       <div>
+      <h1 className="eventHeader">
+          {this.props.featuredEvent.name} | {this.props.featuredEvent.location.label.split(',')[0]} | 
+          {moment(this.props.featuredEvent.when).add(8, 'hour').calendar()}
+      </h1>
       <h3>Information</h3>
         <iframe
           style={styles.map}
