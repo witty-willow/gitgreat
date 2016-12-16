@@ -31,20 +31,36 @@ ReactStormpath.init({
 //MIGHT NEED TO ACCESS USER STATE IN COMPONENTS
 
 //Renders the HomepageApp component on index.html
+// ReactDOM.render((
+//   <Router history={browserHistory}>
+//     <HomeRoute path="/" component={HomepageApp}>
+//       <AuthenticatedRoute>
+//         <IndexRoute component={EventList} />
+//       </AuthenticatedRoute>
+//       <LoginRoute path='/login' component={LoginPage} />
+//       <Route path='/register' component={RegistrationPage} />
+//       <AuthenticatedRoute path="create" component={CreateEventApp} />
+//       <AuthenticatedRoute path="planning" component={EventPlanning} /> 
+//         <Route path="reminders" component={Reminders} />
+//         <Route path="photos" component={Photos} />
+//         <Route path="what-to-bring" component={WhatToBring} />
+//     </HomeRoute>
+//   </Router>
+//   ), document.getElementById('HomepageApp') 
+// );
+
 ReactDOM.render((
   <Router history={browserHistory}>
-    <HomeRoute path="/" component={HomepageApp}>
-      <AuthenticatedRoute>
-        <IndexRoute component={EventList} />
-      </AuthenticatedRoute>
-      <LoginRoute path='/login' component={LoginPage} />
-      <Route path='/register' component={RegistrationPage} />
-      <AuthenticatedRoute path="create" component={CreateEventApp} />
-      <AuthenticatedRoute path="planning" component={EventPlanning} /> 
-        <Route path="planning/reminders" component={Reminders} />
-        <Route path="planning/photos" component={Photos} />
-        <Route path="planning/what-to-bring" component={WhatToBring} />
-    </HomeRoute>
+    <Route path="/" component={HomepageApp}> 
+      <IndexRoute component={EventList} />
+      <Route path="create" component={CreateEventApp} />
+      <Route path="list" component={EventList}/> 
+      <Route path="planning" component={EventPlanning}> 
+        <Route path="reminders" component={Reminders} />
+        <Route path="photos" component={Photos} />
+        <Route path="what-to-bring" component={WhatToBring} />
+      </Route>
+    </Route>
   </Router>
   ), document.getElementById('HomepageApp') 
 );
