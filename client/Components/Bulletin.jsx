@@ -5,7 +5,7 @@ class Bulletin extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      bulletinPosts: []
+      posts: []
     }
   }
 
@@ -13,8 +13,8 @@ class Bulletin extends React.Component {
   render() {
     return (
       <div id="bulletin" className="container">
-        <Panel header='Information'>
-          Panel content
+        <Panel header='Event News & Discussion'>
+
         </Panel>
       </div>);
   }
