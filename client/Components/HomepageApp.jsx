@@ -5,7 +5,7 @@ import EventList from './EventList.jsx';
 import EventPlanning from './EventPlanning.jsx';
 import CreateEventApp from './CreateEventApp.jsx';
 import {browserHistory} from 'react-router';
-import Nav from './Nav.jsx';
+import Navigation from './Navigation.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -33,7 +33,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Nav />
+        <Navigation />
         {this.props.children && React.cloneElement(this.props.children, {
           featuredEvent: this.state.featuredEvent,
           handleEntryClick: this.handleEntryClick,

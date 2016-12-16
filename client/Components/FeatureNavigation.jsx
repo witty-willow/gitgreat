@@ -2,38 +2,42 @@
 //Allows user to navigate between the event planning details
 import React from 'react';
 import {Router, Route, Link, browserHistory, IndexRoute} from 'react-router';
+import {Button} from 'react-bootstrap';
+
 var FeatureNavigation = (props) => (
   <div id="eventNav">
     <center>
-    <button>
+    
+    <Button>
     <Link href='#' className="wtbBtn" id="firstBtn" 
     value="whatToBringBtn" to={'/planning/what-to-bring'}>
     What To Bring
     </Link>
-    </button>
+    </Button>
 
-    <button href='#' className="chatBtn" value="infoBtn">
+    <Button>
     <Link href='#' className="infoBtn" value="infoBtn" to={'/planning/info'}>
     Info 
     </Link>
-    </button>
+    </Button>
 
-    <button>
+    <Button>
     <Link href='#' className="reminderBtn" value="reminderBtn" to={'/planning/reminders'}>
     Reminders
     </Link>
-    </button>
+    </Button>
 
-    <button>
+    <Button>
     <Link href='#' className="photosBtn" value="photosBtn" to={'/planning/photos'}>
     Photos
     </Link>
-    </button>
+    </Button>
 
-    <button href='#' className="chatBtn" value="chatBtn">
-    Chatroom (IP)
-    </button>
-
+    <Button>
+    <Link href='#' className="chatBtn" value="chatBtn" to={'/planning/bulletin'}>
+    Bulletin
+    </Link>
+    </Button>
 
     </center>
   </div>
