@@ -2,45 +2,29 @@
 //Allows user to navigate between the event planning details
 import React from 'react';
 import {Router, Route, Link, browserHistory, IndexRoute} from 'react-router';
-import {Button} from 'react-bootstrap';
+import {Button, Nav, NavItem, Grid} from 'react-bootstrap';
+import {LinkContainer} from 'react-router-bootstrap';
 
 var FeatureNavigation = (props) => (
-  <div id="eventNav">
-    <center>
-    
-    <Button>
-    <Link href='#' className="wtbBtn" id="firstBtn" 
-    value="whatToBringBtn" to={'/planning/what-to-bring'}>
-    What To Bring
-    </Link>
-    </Button>
-
-    <Button>
-    <Link href='#' className="infoBtn" value="infoBtn" to={'/planning/info'}>
-    Info 
-    </Link>
-    </Button>
-
-    <Button>
-    <Link href='#' className="reminderBtn" value="reminderBtn" to={'/planning/reminders'}>
-    Reminders
-    </Link>
-    </Button>
-
-    <Button>
-    <Link href='#' className="photosBtn" value="photosBtn" to={'/planning/photos'}>
-    Photos
-    </Link>
-    </Button>
-
-    <Button>
-    <Link href='#' className="chatBtn" value="chatBtn" to={'/planning/bulletin'}>
-    Bulletin
-    </Link>
-    </Button>
-
-    </center>
-  </div>
+  <Grid>
+    <Nav bsStyle="pills" activeKey={1}>
+      <LinkContainer to={{pathname: '/planning/info'}}>
+        <NavItem eventKey={1}>Info</NavItem>
+      </LinkContainer>
+      <LinkContainer to={{pathname: '/planning/what-to-bring'}}>
+        <NavItem eventKey={2}>What To Bring</NavItem>
+      </LinkContainer>
+      <LinkContainer to={{pathname: '/planning/reminders'}}>
+        <NavItem eventKey={3}>Reminders</NavItem>
+      </LinkContainer>
+      <LinkContainer to={{pathname: '/planning/photos'}}>
+        <NavItem eventKey={4}>Photos</NavItem>
+      </LinkContainer>
+      <LinkContainer to={{pathname: '/planning/bulletin'}}>
+        <NavItem eventKey={5}>Bulletin</NavItem>
+      </LinkContainer>
+    </Nav>
+  </Grid>
 );
 
 module.exports = FeatureNavigation;

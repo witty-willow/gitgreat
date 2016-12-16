@@ -3,7 +3,8 @@
 import React from 'react';
 import {Link} from 'react-router';
 import {Nav, Navbar, NavItem, MenuItem, NavDropdown} from 'react-bootstrap';
-import {LoginLink, LogoutLink, Authenticated, NotAuthenticated} from 'react-stormpath'
+import {LoginLink, LogoutLink, Authenticated, NotAuthenticated} from 'react-stormpath';
+import {LinkContainer} from 'react-router-bootstrap';
 
 //MIGHT NEED TO ACCESS USER STATE IN COMPONENTS
 
@@ -15,32 +16,28 @@ var Navigation = ({handleCreateClick}) => (
       </Navbar.Brand>
     </Navbar.Header>
     <Nav>
+      <LinkContainer to={{pathname: '/'}}>
+        <NavItem eventKey={1}>Home</NavItem>
+      </LinkContainer>
 
-      <NavItem>
-        <Link to={'/'}>Home </Link>
-      </NavItem>
+      <LinkContainer to={{pathname: '/create'}}>
+        <NavItem eventKey={2}>Create Event</NavItem>
+      </LinkContainer>
 
-      <NavItem>
-        <Link to={'/create'} >Create Event</Link>
-      </NavItem> 
+      <NotAuthenticated>
+        <LoginLink>Login</LoginLink>
+      </NotAuthenticated>
+      <Authenticated>
+        <LogoutLink>Logout</LogoutLink>
+      </Authenticated>
 
-      <NavItem>
-        <NotAuthenticated>
-          <LoginLink>Login</LoginLink>
-        </NotAuthenticated>
-        <Authenticated>
-          <LogoutLink>Logout</LogoutLink>
-        </Authenticated>
-      </NavItem>  
-
-      <NavItem>
-        <Link to={'/register'}> Register </Link>
-      </NavItem>
-    
+      <LinkContainer to={{pathname: '/register'}}>
+        <NavItem eventKey={3}>Register</NavItem>
+      </LinkContainer>
     </Nav>
   </Navbar>
 
-    
+
 );
 
 module.exports = Navigation;
