@@ -2,6 +2,7 @@ const express = require('express');
 const parser = require('body-parser');
 const url = require('url');
 var stormpath = require('express-stormpath');
+var API_KEY = require('./API_KEY.js');
 
 const db = require('../db');
 const dbModels = require('../db/index.js');
@@ -29,6 +30,13 @@ app.use(express.static(path.join(__dirname, '..', '/public')));
 app.use('/scripts', express.static('../node_modules'));
 
 app.use(stormpath.init(app, {
+  apiKey: {
+    id: API_KEY.id,
+    secret: API_KEY.secret
+  },
+  application: {
+    href: API_KEY.href
+  },
   website: true,
    web: {
     produces: ['application/json']
