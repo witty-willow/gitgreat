@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 
 class Info extends React.Component {
   constructor(props) {
