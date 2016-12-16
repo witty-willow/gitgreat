@@ -6,6 +6,7 @@ import EventPlanning from './EventPlanning.jsx';
 import CreateEventApp from './CreateEventApp.jsx';
 import {browserHistory} from 'react-router';
 import Nav from './Nav.jsx';
+import moment from 'moment';
 
 class App extends React.Component {
   constructor(props) {
@@ -29,6 +30,9 @@ class App extends React.Component {
     }, function() {
       browserHistory.push('/planning');
     });
+  }
+  handleDeleteClick(event) {
+
   }
   render() {
     return (

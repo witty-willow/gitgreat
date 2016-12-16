@@ -22,7 +22,7 @@ var job = new CronJob('10 * * * * *',
       if (!!reminder) {
         var now = new Date();
         var reminderDate = new Date(reminder.when);
-        console.log(now, reminderDate);
+        now = now.setHours(now.getHours() - 8);
         if (now >= reminderDate) { //compare the current date to the reminder date
           client.sendMessage({ 
             to: reminder.phoneNumber, 
