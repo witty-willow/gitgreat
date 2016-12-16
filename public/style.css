@@ -81,31 +81,37 @@ label {
 }
 
 
+#bulletin {
+  width: 700px;
+  margin: 0 auto;
+}
 
-.bringForm {
+/*.bringForm {
   margin-left: 25%;
   position: relative;
   top: 20px;
+}*/
+
+.featureBtn {
+  margin: 3px;
 }
 
-.bringForm > input {
+/*.bringForm > input {
   margin-left: 30px;
-}
+}*/
 
 .remindForm {
   position: relative;
   text-align: center;
   margin-top: 50px;
 }
-
-table {
-  position: relative;
-  top: 20px;
-  margin-top: 10px;
+#whatToBring {
+  width: 65%;
+  margin: 0 auto;
+}
+/*table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
-  width: 50%;
-  margin-left: 25%;
 }
 
 td, th {
@@ -117,7 +123,7 @@ td, th {
 tr:nth-child(even) {
   background-color: #dddddd;
 }
-
+*/
 .geosuggest {
   font-size: 18px;
   font-size: 1rem;

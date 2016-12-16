@@ -8,32 +8,32 @@ var FeatureNavigation = (props) => (
   <div id="eventNav">
     <center>
     
-    <Button>
+    <Button className="featureBtn">
     <Link href='#' className="wtbBtn" id="firstBtn" 
     value="whatToBringBtn" to={'/planning/what-to-bring'}>
     What To Bring
     </Link>
     </Button>
 
-    <Button>
+    <Button className="featureBtn">
     <Link href='#' className="infoBtn" value="infoBtn" to={'/planning/info'}>
     Info 
     </Link>
     </Button>
 
-    <Button>
+    <Button className="featureBtn">
     <Link href='#' className="reminderBtn" value="reminderBtn" to={'/planning/reminders'}>
     Reminders
     </Link>
     </Button>
 
-    <Button>
+    <Button className="featureBtn">
     <Link href='#' className="photosBtn" value="photosBtn" to={'/planning/photos'}>
     Photos
     </Link>
     </Button>
 
-    <Button>
+    <Button className="featureBtn">
     <Link href='#' className="chatBtn" value="chatBtn" to={'/planning/bulletin'}>
     Bulletin
     </Link>
