@@ -16,23 +16,28 @@ label {
 }
 
 
-.navbar {
+.main-nav.navbar {
   position: relative;
   min-height: 80px;
-  margin-bottom: 20px;
-  border: 2px solid #e6e6e6;
+  border-bottom: 2px solid #e6e6e6;
   background: white;
+  margin-bottom: 0;
 }
 
-.navbar-nav.nav {
-  margin-bottom: -30px;
-}
-
-.navbar .container {
+.main-nav.navbar .container {
   padding-top: 35px;
   max-width: 575px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.sub-nav.navbar {
+  background: white;
+  border-bottom: 2px solid #e6e6e6;
+}
+
+.sub-nav.navbar .container{
+  max-width: 500px;
 }
 
 .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
