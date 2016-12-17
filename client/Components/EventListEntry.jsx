@@ -15,9 +15,9 @@ class EventListEntry extends React.Component {
     $.ajax({
       method: 'DELETE',
       url: '/eventTable?' + $.param({"name": eventName}),
-      success: function() {
+      success: function () {
         this.props.update();
-      }
+      }.bind(this)
     });
   }
   

@@ -15,6 +15,10 @@ class EventList extends React.Component {
     this.update = this.update.bind(this);
   }
   componentWillMount() {
+    this.loadData();
+  }
+
+  loadData() {
     //This function will sort the events in the eventList into two categories: upcoming and completed
     //The sort logic compares the event date with the current date and checks to see if the event
     //has already passed.
@@ -45,8 +49,8 @@ class EventList extends React.Component {
   }
   
   update() {
-    console.log('sup');
-    this.forceUpdate();
+    console.log('update');
+    this.loadData();
   }
 
 
