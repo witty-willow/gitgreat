@@ -78,11 +78,21 @@ label {
   border-radius: 5px;
   padding: 15px;
   margin: 10px;
+  position: relative;
 }
 
-.deleteBtn {
-  float: right;
-  margin-bottom: 5px;
+.trash {
+  position: absolute;
+  right: 15px;
+  top: 36%;
+}
+
+.trash:hover {
+  cursor: pointer;
+}
+
+.fa-trash-o {
+  font-size: 1.7em;
 }
 
 
