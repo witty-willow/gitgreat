@@ -20,13 +20,11 @@ class EventListEntry extends React.Component {
       }.bind(this)
     });
   }
-  
+
   render() {
     return (
       <div className="listEntry" >
-        <button className='deleteBtn' onClick={() => this.handleDeleteClick(this.props.event)}>
-          Remove Event
-        </button>
+        <i onClick={() => this.handleDeleteClick(this.props.event)} className="fa fa-trash-o trash"></i>
         <div onClick={() => this.props.handleEntryClick(this.props.event)}>
           <strong>{this.props.event.name}</strong><br />
           Location: {this.props.event.location.label}<br />
