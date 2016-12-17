@@ -32,7 +32,7 @@ ReactStormpath.init({
 //TENANT -- copper-bow
 //MIGHT NEED TO ACCESS USER STATE IN COMPONENTS
 
-//Renders the HomepageApp component on index.html
+// Renders the HomepageApp component on index.html
 // ReactDOM.render((
 //   <Router history={browserHistory}>
 //     <HomeRoute path="/" component={HomepageApp}>
@@ -42,10 +42,12 @@ ReactStormpath.init({
 //       <LoginRoute path='/login' component={LoginPage} />
 //       <Route path='/register' component={RegistrationPage} />
 //       <AuthenticatedRoute path="create" component={CreateEventApp} />
-//       <AuthenticatedRoute path="planning" component={EventPlanning} />
+//       <Route path="planning" component={EventPlanning} />
+//         <Route path="info" component={Info} />
 //         <Route path="reminders" component={Reminders} />
 //         <Route path="photos" component={Photos} />
 //         <Route path="what-to-bring" component={WhatToBring} />
+//         <Route path="bulletin" component={Bulletin} />
 //     </HomeRoute>
 //   </Router>
 //   ), document.getElementById('HomepageApp')

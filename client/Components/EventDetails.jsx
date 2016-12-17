@@ -1,5 +1,9 @@
 import React from 'react';
-
+// Name
+// Location
+// Date
+// Time
+// Category
 class EventDetails extends React.Component {
   constructor(props) {
     super(props)
