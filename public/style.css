@@ -167,6 +167,12 @@ label {
   width: 65%;
   margin: 0 auto;
 }
+
+.photos {
+  width: 50%;
+  height: 50%;
+  margin: 20px;
+}
 /*table {
   font-family: arial, sans-serif;
   border-collapse: collapse;

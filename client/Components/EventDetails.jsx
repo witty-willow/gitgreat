@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 // Name
 // Location
 // Date
@@ -14,7 +15,7 @@ class EventDetails extends React.Component {
       <div>
         <h1>{this.props.featuredEvent.name}</h1>
         <p>{this.props.featuredEvent.location.address}</p>
-        <p>{this.props.featuredEvent.when}</p>
+        <p>{moment(this.props.featuredEvent.when).add(8, 'hours').calendar()}</p>
         <h3>Categories</h3>
         <ul>
           {this.props.featuredEvent.location.categories.map(function(category) {
