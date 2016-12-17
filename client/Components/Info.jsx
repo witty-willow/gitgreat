@@ -1,6 +1,7 @@
 import React from 'react';
 import EventMapAndDetails from './EventMapAndDetails.jsx';
 import {Grid} from 'react-bootstrap';
+import moment from 'moment';
 
 class Info extends React.Component {
   constructor(props) {
@@ -20,7 +21,7 @@ class Info extends React.Component {
       }
     }
     return (
-      <EventMapAndDetails featuredEvent={this.props.featuredEvent}/>
+      <EventMapAndDetails featuredEvent={this.props.featuredEvent} time={moment(this.props.featuredEvent.when).add(8, 'hour').calendar()}/>
     );
   }
 }

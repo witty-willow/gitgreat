@@ -1,20 +1,21 @@
 import React from 'react';
-import {Panel} from 'react-bootstrap';
+import {Panel, Container} from 'react-bootstrap';
 
 class Bulletin extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      bulletinPosts: []
+      posts: []
     }
   }
 
 
   render() {
     return (
-      <div>
-      <h3>Information</h3>
-       <p>a suh</p>
+      <div id="bulletin" className="container">
+        <Panel header='Event News & Discussion'>
+
+        </Panel>
       </div>);
   }
 }
