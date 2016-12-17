@@ -46,19 +46,22 @@ app.get('/', function(req, res, next) {
 
 app.post('/eventTable', function(req, res, next) {
   var location = req.body.location;
-  dbModels.EventTable
-    .create({
+  return dbModels.EventTable.create({
       name: req.body.name,
       when: req.body.when,
       // owner: req.body.owner.email
     })
     .then(function(event) {
-      event.addUsersTable(req.body.owner.email);
-      console.log('THIS IS THE EVENT TABLE!!!!!!!!!!', dbModels.EventTable.addUserTable)
-      console.log('THIS IS THE EVENT!!!!!!!!!!', event.addUserTable)
-      console.log('THIS IS THE JOIN TABLE', dbModels.UsersTableEventTable)
-
-
+      dbModels.UsersTable.findOne({where: {email: req.body.owner.email}})
+      .then(function(user) {
+        dbModels.UsersTableEventTable.create({
+          userId: user.dataValues.id,
+          eventId: event.dataValues.id
+        })
+        .then(function () {
+          console.log('OMG WE DID IT!!!!!!!')
+        })
+      })
     })
     //NEED TO SPECIFY EMAIL AS FOREIGN KEY
     .then(function() {
