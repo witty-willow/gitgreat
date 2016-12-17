@@ -1,4 +1,6 @@
 import React from 'react';
+import EventMapAndDetails from './EventMapAndDetails.jsx';
+import {Grid} from 'react-bootstrap';
 
 class Info extends React.Component {
   constructor(props) {
@@ -7,8 +9,6 @@ class Info extends React.Component {
       photoUrls: []
     }
   }
-
-
   render() {
     var mapSrc = `https://www.google.com/maps/embed/v1/place?key=AIzaSyDMwCZtOT8kkwzQuDfktBsoC6hUR5USgRI
           &q=place_id:${this.props.featuredEvent.location.placeID}`;
@@ -20,14 +20,10 @@ class Info extends React.Component {
       }
     }
     return (
-      <div>
-      <h3>Information</h3>
-        <iframe
-          style={styles.map}
-          frameBorder="0"
-          src={mapSrc} allowFullScreen>
-        </iframe>
-      </div>);
+      <Grid>
+        <EventMapAndDetails featuredEvent={this.props.featuredEvent}/>
+      </Grid>
+    );
   }
 }
 
