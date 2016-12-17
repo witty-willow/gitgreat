@@ -106,6 +106,7 @@ app.delete('/eventTable', function(req, res, next) {
   dbModels.EventTable.destroy({where: {name: eventName}})
     .then(function(event) {
       console.log('deleted');
+      res.sendStatus(200);
     });
   console.log(eventName);
 });
