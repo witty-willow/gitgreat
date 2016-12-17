@@ -46,11 +46,24 @@ app.get('/', function(req, res, next) {
 
 app.post('/eventTable', function(req, res, next) {
   var location = req.body.location;
-  dbModels.EventTable
-    .create({
+  return dbModels.EventTable.create({
       name: req.body.name,
-      when: req.body.when
+      when: req.body.when,
+      // owner: req.body.owner.email
     })
+    .then(function(event) {
+      dbModels.UsersTable.findOne({where: {email: req.body.owner.email}})
+      .then(function(user) {
+        dbModels.UsersTableEventTable.create({
+          userId: user.dataValues.id,
+          eventId: event.dataValues.id
+        })
+        .then(function () {
+          console.log('OMG WE DID IT!!!!!!!')
+        })
+      })
+    })
+    //NEED TO SPECIFY EMAIL AS FOREIGN KEY
     .then(function() {
       dbModels.EventTable.findOne({where: {name: req.body.name}})
         .then(function(event) {
@@ -62,7 +75,7 @@ app.post('/eventTable', function(req, res, next) {
               longitude: location.longitude,
               placeID: location.placeID,
               categories: location.categories,
-              eventId: event.id
+              eventId: event.id,
             })
             .then(function() {
               res.sendStatus(200);
@@ -211,6 +224,21 @@ app.get('/displayImages', function(req, res) {
    res.send(data);
  });
 });
+
+app.post('/createAccount', function (req, res) {
+  dbModels.UsersTable.create({
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    email: req.body.email,
+  })
+   .then(function(event) {
+     console.log('successfully added user to db!!!');
+   })
+   .catch(function(err) {
+     console.log('UsersTable db entry error: ', err);
+   });
+  res.sendStatus(201)
+})
 
 app.get('*', function(req, res) {
   res.sendFile(path.join(__dirname, '..', '/public/homepage.html'));

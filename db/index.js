@@ -96,13 +96,25 @@ var UsersTable = sequelize.define('users', {
     autoIncrement: true,
     primaryKey: true
   },
-  username: {
+  firstName: {
     type: Sequelize.STRING
   },
-  password: {
+  lastName: {
+    type: Sequelize.STRING
+  },
+  email: {
     type: Sequelize.STRING
   },
 });
+
+var UsersTableEventTable = sequelize.define('UsersTableEventTable', {
+  id : {
+    type: Sequelize.INTEGER,
+    primaryKey: true,
+    autoIncrement: true
+  }
+});
+
 
 
 
@@ -134,3 +146,4 @@ module.exports.ItemListTable = ItemListTable;
 module.exports.ReminderTable = ReminderTable;
 module.exports.UsersTable = UsersTable;
 module.exports.LocationTable = LocationTable;
+module.exports.UsersTableEventTable = UsersTableEventTable;

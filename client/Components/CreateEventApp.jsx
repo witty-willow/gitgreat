@@ -9,12 +9,17 @@ class CreateEventApp extends React.Component {
     this.state = {
       name: '',
       when: '',
-      location: {}
+      location: {},
+      owner: this.props.user
     };
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
     this.handleLocChange = this.handleLocChange.bind(this);
     this.handleEventSubmit = this.handleEventSubmit.bind(this);
+  }
+
+  componentDidMount () {
+    console.log(this.state.owner)
   }
 
   handleNameChange(event) {
