@@ -28,15 +28,9 @@ class EventPlanning extends React.Component {
     return (
       <div>
         <FeatureNavigation changeDisplay={this.changeTabDisplay} />
-
-        <br />
-
-
-          {
-            this.props.children && React.cloneElement(this.props.children, {
-                featuredEvent: this.props.featuredEvent
-            })
-          }
+        {this.props.children && React.cloneElement(this.props.children, {
+          featuredEvent: this.props.featuredEvent
+        })}
       </div>
     );
   }
