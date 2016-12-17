@@ -96,13 +96,25 @@ var UsersTable = sequelize.define('users', {
     autoIncrement: true,
     primaryKey: true
   },
-  username: {
+  firstName: {
     type: Sequelize.STRING
   },
-  password: {
+  lastName: {
+    type: Sequelize.STRING
+  },
+  email: {
     type: Sequelize.STRING
   },
 });
+
+var UsersTableEventTable = sequelize.define('UsersTableEventTable', {
+  id : {
+    type: Sequelize.INTEGER,
+    primaryKey: true,
+    autoIncrement: true
+  }
+});
+
 
 
 
@@ -125,7 +137,7 @@ sequelize
 
 
 
-sequelize.sync({force: true})
+sequelize.sync()
   .then(function(err) {console.log('It worked!')}, function(err) {console.log('Error occured', err)});
 
 module.exports.PhotosTable = PhotosTable;
@@ -134,3 +146,4 @@ module.exports.ItemListTable = ItemListTable;
 module.exports.ReminderTable = ReminderTable;
 module.exports.UsersTable = UsersTable;
 module.exports.LocationTable = LocationTable;
+module.exports.UsersTableEventTable = UsersTableEventTable;

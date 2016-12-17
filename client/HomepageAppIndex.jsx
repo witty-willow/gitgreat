@@ -30,37 +30,37 @@ ReactStormpath.init({
 //TENANT -- copper-bow
 //MIGHT NEED TO ACCESS USER STATE IN COMPONENTS
 
-//Renders the HomepageApp component on index.html
-// ReactDOM.render((
-//   <Router history={browserHistory}>
-//     <HomeRoute path="/" component={HomepageApp}>
-//       <AuthenticatedRoute>
-//         <IndexRoute component={EventList} />
-//       </AuthenticatedRoute>
-//       <LoginRoute path='/login' component={LoginPage} />
-//       <Route path='/register' component={RegistrationPage} />
-//       <AuthenticatedRoute path="create" component={CreateEventApp} />
-//       <AuthenticatedRoute path="planning" component={EventPlanning} /> 
-//         <Route path="reminders" component={Reminders} />
-//         <Route path="photos" component={Photos} />
-//         <Route path="what-to-bring" component={WhatToBring} />
-//     </HomeRoute>
-//   </Router>
-//   ), document.getElementById('HomepageApp') 
-// );
-
+// Renders the HomepageApp component on index.html
 ReactDOM.render((
   <Router history={browserHistory}>
-    <Route path="/" component={HomepageApp}> 
-      <IndexRoute component={EventList} />
-      <Route path="create" component={CreateEventApp} />
-      <Route path="list" component={EventList}/> 
-      <Route path="planning" component={EventPlanning}> 
+    <HomeRoute path="/" component={HomepageApp}>
+      <AuthenticatedRoute>
+        <IndexRoute component={EventList} />
+      </AuthenticatedRoute>
+      <LoginRoute path='/login' component={LoginPage} />
+      <Route path='/register' component={RegistrationPage} />
+      <AuthenticatedRoute path="create" component={CreateEventApp} />
+      <AuthenticatedRoute path="planning" component={EventPlanning} /> 
         <Route path="reminders" component={Reminders} />
         <Route path="photos" component={Photos} />
         <Route path="what-to-bring" component={WhatToBring} />
-      </Route>
-    </Route>
+    </HomeRoute>
   </Router>
   ), document.getElementById('HomepageApp') 
 );
+
+// ReactDOM.render((
+//   <Router history={browserHistory}>
+//     <Route path="/" component={HomepageApp}> 
+//       <IndexRoute component={EventList} />
+//       <Route path="create" component={CreateEventApp} />
+//       <Route path="list" component={EventList}/> 
+//       <Route path="planning" component={EventPlanning}> 
+//         <Route path="reminders" component={Reminders} />
+//         <Route path="photos" component={Photos} />
+//         <Route path="what-to-bring" component={WhatToBring} />
+//       </Route>
+//     </Route>
+//   </Router>
+//   ), document.getElementById('HomepageApp') 
+// );

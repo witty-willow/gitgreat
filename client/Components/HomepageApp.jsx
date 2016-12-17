@@ -1,6 +1,6 @@
 //Parent App within index.html
 //Allows users to view events, create and view event planning details
-import React from 'react';
+import React, {PropTypes} from 'react';
 import EventList from './EventList.jsx';
 import EventPlanning from './EventPlanning.jsx';
 import CreateEventApp from './CreateEventApp.jsx';
@@ -10,12 +10,32 @@ import Nav from './Nav.jsx';
 class App extends React.Component {
   constructor(props) {
     super(props);
+
+    App.contextTypes = {user: React.PropTypes.object, authenticated: React.PropTypes.bool}
+
     this.state = {
-      featuredEvent: {}
+      featuredEvent: {}, 
+      // user: this.context.user
     }
+
+
+
     this.handleEntryClick = this.handleEntryClick.bind(this);
     this.getEventData = this.getEventData.bind(this);
+    this.componentDidMount = this.componentDidMount.bind(this);
+    this.getUser = this.getUser.bind(this);
   }
+
+  componentDidMount () {
+    browserHistory.push('/');
+    // console.log(this.context)
+    // console.log(this.context)
+  }
+
+   getUser () {
+    console.log(this.context)
+  }
+
   handleEntryClick(event) {
     this.setState({
       featuredEvent: event,
@@ -32,12 +52,13 @@ class App extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div > {/*onMouseMove={this.getUser}*/}
         <Nav />
         {this.props.children && React.cloneElement(this.props.children, {
           featuredEvent: this.state.featuredEvent,
           handleEntryClick: this.handleEntryClick,
-          getEventData: this.getEventData
+          getEventData: this.getEventData,
+          user: this.context.user
         })}
       </div>
     );
