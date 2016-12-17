@@ -23,14 +23,14 @@ var Navigation = ({handleCreateClick}) => (
       <LinkContainer to={{pathname: '/create'}}>
         <NavItem eventKey={2}>Create Event</NavItem>
       </LinkContainer>
-
-      <NotAuthenticated>
-        <LoginLink>Login</LoginLink>
-      </NotAuthenticated>
-      <Authenticated>
-        <LogoutLink>Logout</LogoutLink>
-      </Authenticated>
-
+      <li>
+        <NotAuthenticated>
+          <LoginLink>Login</LoginLink>
+        </NotAuthenticated>
+        <Authenticated>
+          <LogoutLink>Logout</LogoutLink>
+        </Authenticated>
+      </li>
       <LinkContainer to={{pathname: '/register'}}>
         <NavItem eventKey={3}>Register</NavItem>
       </LinkContainer>
