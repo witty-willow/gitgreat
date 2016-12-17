@@ -9,7 +9,7 @@ import {LinkContainer} from 'react-router-bootstrap';
 //MIGHT NEED TO ACCESS USER STATE IN COMPONENTS
 
 var Navigation = ({handleCreateClick}) => (
-  <Navbar>
+  <Navbar className="main-nav">
     <Navbar.Header>
       <Navbar.Brand>
         <Link to={'/'} className='title'>Friends</Link>
