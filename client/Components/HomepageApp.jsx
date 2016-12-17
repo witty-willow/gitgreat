@@ -32,9 +32,6 @@ class App extends React.Component {
       browserHistory.push('/planning');
     });
   }
-  handleDeleteClick(event) {
-
-  }
   render() {
     return (
       <div>

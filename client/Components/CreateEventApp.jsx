@@ -56,9 +56,6 @@ class CreateEventApp extends React.Component {
     }
     event.preventDefault();
   }
-  handleDeleteClick(event) {
-
-  }
   render() {
     return (
       <div>
