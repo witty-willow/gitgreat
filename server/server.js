@@ -114,6 +114,16 @@ app.get('/eventTable', function(req, res, next) {
   });
 });
 
+app.delete('/eventTable', function(req, res, next) {
+  var eventName = url.parse(req.url).query.slice(5).split('_').join(' ');
+  dbModels.EventTable.destroy({where: {name: eventName}})
+    .then(function(event) {
+      console.log('deleted');
+      res.sendStatus(200);
+    });
+  console.log(eventName);
+});
+
 app.post('/itemList', function(req, res, next) {
   var eventName = url.parse(req.url).query.slice(10).split('_').join(' ');
   dbModels.EventTable.findOne({where: {name: eventName}})

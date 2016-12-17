@@ -12,8 +12,13 @@ class EventList extends React.Component {
       upcoming: [],
       completed: []
     };
+    this.update = this.update.bind(this);
   }
   componentWillMount() {
+    this.loadData();
+  }
+
+  loadData() {
     //This function will sort the events in the eventList into two categories: upcoming and completed
     //The sort logic compares the event date with the current date and checks to see if the event
     //has already passed.
@@ -27,6 +32,7 @@ class EventList extends React.Component {
         data.forEach((event) => {
           var now = new Date();
           var eventDate = new Date(event.when);
+          eventDate = eventDate.setHours(eventDate.getHours() + 8);
           if (eventDate >= now) {
             upcoming.push(event);
           } else {
@@ -41,6 +47,13 @@ class EventList extends React.Component {
       }.bind(this)
     });
   }
+  
+  update() {
+    console.log('update');
+    this.loadData();
+  }
+
+
   render() {
     return (
       <div>
@@ -51,6 +64,7 @@ class EventList extends React.Component {
               <EventListEntry
                 key={index} event={event}
                 handleEntryClick={this.props.handleEntryClick}
+                update={this.update}
               />
             );
           })}
@@ -62,6 +76,7 @@ class EventList extends React.Component {
                 <EventListEntry
                   key={index} event={event}
                   handleEntryClick={this.props.handleEntryClick}
+                  update={this.update}
                 />
               );
             })}

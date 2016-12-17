@@ -6,6 +6,7 @@ module.exports = {
     path: path.resolve(__dirname, 'public/dist'),
     filename: 'bundle.js'
   },
+  devtool: '#eval-source-map',
   module: {
     loaders: [
       { test: /\.jsx$/, exclude: /node_modules/, loader: "babel-loader" }

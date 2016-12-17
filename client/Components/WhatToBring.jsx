@@ -1,6 +1,7 @@
 import React from 'react';
 import helpers from './WhatToBringHelpers.jsx';
 import Promise from 'bluebird';
+import {Button, Table, Form} from 'react-bootstrap';
 
 //Child component within the Event Planning component
 //Allows users to create a list of items that need to be brought to an event;
@@ -134,11 +135,10 @@ class WhatToBring extends React.Component {
 
   render() {
 
-    // A promise that returns an object with each user and how much they spent
 
     return (
-      <div>
-        <form className="bringForm" onSubmit={this.handleSubmit}>
+      <div id="whatToBring">
+        <Form className="bringForm" onSubmit={this.handleSubmit}>
           <label>
             Owner:
           <input type='text' name='owner'
@@ -157,9 +157,12 @@ class WhatToBring extends React.Component {
               onChange={this.handleCostChange}
             />
           </label>
-          <input type="submit" value="Submit" />
-        </form>
-        <table className="bringTable">
+          <Button type="submit" value="Submit">
+            Submit
+          </Button>
+        </Form>
+        <br/>
+        <Table striped bordered condensed hover>
           <thead>
             <tr>
               <th>Owner</th>
@@ -176,8 +179,8 @@ class WhatToBring extends React.Component {
               </tr>
             )}
           </tbody>
-        </table>
-        <table className="bringTable">
+        </Table>
+        <Table striped bordered condensed hover>
           <thead>
             <tr>
               <th>
@@ -192,7 +195,7 @@ class WhatToBring extends React.Component {
               </tr>
             )}
           </tbody>
-        </table>
+        </Table>
       </div>
     );
   }

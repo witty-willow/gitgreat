@@ -5,6 +5,8 @@ import EventList from './Components/EventList.jsx';
 import EventPlanning from './Components/EventPlanning.jsx';
 import Reminders from './Components/Reminders.jsx';
 import Photos from './Components/Photos.jsx';
+import Info from './Components/Info.jsx';
+import Bulletin from './Components/Bulletin.jsx';
 import WhatToBring from './Components/WhatToBring.jsx';
 import {Route, Link, browserHistory, IndexRoute} from 'react-router';
 import React from 'react';
@@ -31,36 +33,41 @@ ReactStormpath.init({
 //MIGHT NEED TO ACCESS USER STATE IN COMPONENTS
 
 // Renders the HomepageApp component on index.html
-ReactDOM.render((
-  <Router history={browserHistory}>
-    <HomeRoute path="/" component={HomepageApp}>
-      <AuthenticatedRoute>
-        <IndexRoute component={EventList} />
-      </AuthenticatedRoute>
-      <LoginRoute path='/login' component={LoginPage} />
-      <Route path='/register' component={RegistrationPage} />
-      <AuthenticatedRoute path="create" component={CreateEventApp} />
-      <AuthenticatedRoute path="planning" component={EventPlanning} /> 
-        <Route path="reminders" component={Reminders} />
-        <Route path="photos" component={Photos} />
-        <Route path="what-to-bring" component={WhatToBring} />
-    </HomeRoute>
-  </Router>
-  ), document.getElementById('HomepageApp') 
-);
-
 // ReactDOM.render((
 //   <Router history={browserHistory}>
-//     <Route path="/" component={HomepageApp}> 
-//       <IndexRoute component={EventList} />
-//       <Route path="create" component={CreateEventApp} />
-//       <Route path="list" component={EventList}/> 
-//       <Route path="planning" component={EventPlanning}> 
+//     <HomeRoute path="/" component={HomepageApp}>
+//       <AuthenticatedRoute>
+//         <IndexRoute component={EventList} />
+//       </AuthenticatedRoute>
+//       <LoginRoute path='/login' component={LoginPage} />
+//       <Route path='/register' component={RegistrationPage} />
+//       <AuthenticatedRoute path="create" component={CreateEventApp} />
+//       <Route path="planning" component={EventPlanning} />
+//         <Route path="info" component={Info} />
 //         <Route path="reminders" component={Reminders} />
 //         <Route path="photos" component={Photos} />
 //         <Route path="what-to-bring" component={WhatToBring} />
-//       </Route>
-//     </Route>
+//         <Route path="bulletin" component={Bulletin} />
+//     </HomeRoute>
 //   </Router>
-//   ), document.getElementById('HomepageApp') 
+//   ), document.getElementById('HomepageApp')
 // );
+
+ReactDOM.render((
+  <Router history={browserHistory}>
+    <Route path="/" component={HomepageApp}>
+      <IndexRoute component={EventList} />
+      <Route path="create" component={CreateEventApp} />
+      <Route path="list" component={EventList}/>
+      <Route path="planning" component={EventPlanning}>
+        <IndexRoute component={Info} />
+        <Route path="info" component={Info} />
+        <Route path="reminders" component={Reminders} />
+        <Route path="photos" component={Photos} />
+        <Route path="what-to-bring" component={WhatToBring} />
+        <Route path="bulletin" component={Bulletin} />
+      </Route>
+    </Route>
+  </Router>
+  ), document.getElementById('HomepageApp')
+);

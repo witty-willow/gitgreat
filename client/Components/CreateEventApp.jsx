@@ -1,5 +1,4 @@
 import React from 'react';
-import Nav from './Nav.jsx';
 import {browserHistory} from 'react-router';
 import Geosuggest from 'react-geosuggest';
 //Parent App within createEvent.html
@@ -46,8 +45,6 @@ class CreateEventApp extends React.Component {
     //the eventTable
     var now = new Date();
     var eventDate = new Date(this.state.when);
-    console.log('now', now);
-    console.log('event', eventDate);
     eventDate = eventDate.setHours(eventDate.getHours() + 8);
     if(eventDate >= now) {
       $.ajax({
