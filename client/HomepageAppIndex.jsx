@@ -59,6 +59,8 @@ ReactDOM.render((
       <IndexRoute component={EventList} />
       <Route path="create" component={CreateEventApp} />
       <Route path="list" component={EventList}/>
+      <LoginRoute path='/login' component={LoginPage} />
+      <Route path='/register' component={RegistrationPage} />
       <Route path="planning" component={EventPlanning}>
         <IndexRoute component={Info} />
         <Route path="info" component={Info} />
