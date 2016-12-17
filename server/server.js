@@ -13,9 +13,9 @@ var path = require('path');
 
 // Wells's cloudinary api key, replace with your own as this key will be deleted soon
 cloudinary.config({
- cloud_name: 'dhdysf6qc',
- api_key: '299727653385491',
- api_secret: 'vshmxkEjzRiylUjrXi20qk67hKA'
+ cloud_name: 'dv3z0av4g',
+ api_key: '558452395646729',
+ api_secret: 'lV8iCnstOegXiLL_p4NzDEh3z4k'
 });
 
 const app = express();
@@ -192,7 +192,6 @@ app.get('/reminders', function(req, res, next) {
 
 
 app.post('/uploadImage', function(req, res) {
- console.log('hits uploadImage in server');
  var form = new multiparty.Form();
  form.parse(req, function(err, fields, files) {
    console.log('fields: ', fields);
@@ -215,7 +214,6 @@ app.post('/uploadImage', function(req, res) {
 });
 
 app.get('/displayImages', function(req, res) {
- console.log('hits displayimages in server');
  dbModels.PhotosTable.findAll()
  .then(function(data) {
    for(var pair in data.entries()) {
