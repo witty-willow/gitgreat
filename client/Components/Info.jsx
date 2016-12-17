@@ -20,9 +20,7 @@ class Info extends React.Component {
       }
     }
     return (
-      <Grid>
-        <EventMapAndDetails featuredEvent={this.props.featuredEvent}/>
-      </Grid>
+      <EventMapAndDetails featuredEvent={this.props.featuredEvent}/>
     );
   }
 }

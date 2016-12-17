@@ -1,6 +1,7 @@
 import React from 'react';
 import EventMap from './EventMap.jsx';
 import EventDetails from './EventDetails.jsx';
+import {Grid, Row, Col} from 'react-bootstrap';
 
 class EventMapAndDetails extends React.Component {
   constructor(props) {
@@ -8,10 +9,16 @@ class EventMapAndDetails extends React.Component {
   }
   render() {
     return (
-      <div>
-        <EventMap featuredEvent={this.props.featuredEvent}/>
-        <EventDetails featuredEvent={this.props.featuredEvent}/>
-      </div>
+      <Grid>
+        <Row>
+          <Col xs={6}>
+            <EventDetails featuredEvent={this.props.featuredEvent}/>
+          </Col>
+          <Col xs={6}>
+            <EventMap featuredEvent={this.props.featuredEvent}/>
+          </Col>
+        </Row>
+      </Grid>
     );
   }
 }
