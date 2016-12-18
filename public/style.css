@@ -159,9 +159,10 @@ label {
 }*/
 
 .remindForm {
-  position: relative;
-  text-align: center;
-  margin-top: 50px;
+  border: 2px solid #e6e6e6;
+  border-radius: 10px;
+  background-color: white;
+  padding: 20px;
 }
 #whatToBring {
   width: 65%;

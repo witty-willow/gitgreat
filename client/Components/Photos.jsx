@@ -1,4 +1,5 @@
 import React from 'react';
+import {Grid, Row, Col, Table} from 'react-bootstrap';
 
 class Photos extends React.Component {
   constructor(props) {
@@ -46,13 +47,16 @@ class Photos extends React.Component {
   render() {
     
     return (
-      <div>Photos Tab Stuff Here
-        <form method="post" encType="multipart/form-data" id="uploadForm">
-          <input type="file" id="imageUpload" accept="image/*" multiple /><br/>
-          <input type="submit" value="submit" onClick={(e) => this.uploadFile(e)}/>
-        </form>
-        {this.state.photoUrls.map(link => <img className="photos" src={link} />)}
-      </div>);
+      <Grid>
+        <div>Photos Tab Stuff Here
+          <form method="post" encType="multipart/form-data" id="uploadForm">
+            <input type="file" id="imageUpload" accept="image/*" multiple /><br/>
+            <input type="submit" value="submit" onClick={(e) => this.uploadFile(e)}/>
+          </form>
+          {this.state.photoUrls.map(link => <img className="photos" src={link} />)}
+        </div>
+      </Grid>
+    );
   }
 }
 

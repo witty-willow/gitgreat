@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import {Grid, Row, Col, Table} from 'react-bootstrap';
 //Child component within the Event Planning component
 //Allows users to send a reminder for purposes of event planning
 class Reminders extends React.Component {
@@ -75,8 +76,8 @@ class Reminders extends React.Component {
 
   render() {
     return (
-      <div>
-        <div className='remindForm'>
+      <Grid  className='remindForm'>
+        <div>
           <h2>Reminders</h2>
           <form onSubmit={this.handleReminderSubmit}>
             <label>
@@ -101,7 +102,7 @@ class Reminders extends React.Component {
           </form>
         </div>  
         <div id='msg'></div>
-        <table>
+        <Table responsive>
           <caption>Reminder List</caption>
           <thead>
             <tr>
@@ -119,8 +120,8 @@ class Reminders extends React.Component {
               </tr>
             )}
           </tbody>
-        </table>
-      </div>
+        </Table>
+      </Grid>
     );
   }
 }
