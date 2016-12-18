@@ -29,6 +29,7 @@ class Photos extends React.Component {
     e.preventDefault();
     var formData = new FormData();
     var files = $('input[type=file]')[0].files[0];
+
     formData.append('imageFile', files);
     $.ajax({
       url: '/uploadImage',
@@ -43,6 +44,7 @@ class Photos extends React.Component {
     });
   }
   render() {
+    
     return (
       <div>Photos Tab Stuff Here
         <form method="post" encType="multipart/form-data" id="uploadForm">
