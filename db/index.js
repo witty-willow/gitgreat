@@ -90,6 +90,41 @@ var ReminderTable = sequelize.define('reminders', {
   },
 });
 
+var Bulletin = sequelize.define('bulletin', {
+  id: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    primaryKey: true
+  },
+  text: {
+    type: Sequelize.STRING
+  },
+  user: {
+    type: Sequelize.STRING
+  },
+  eventId: {
+    type: Sequelize.INTEGER,
+    references: {
+      model: EventTable,
+      key: 'id'
+    }
+  }
+});
+
+var BulletinComment = sequelize.define('bulletinComment', {
+  id: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    primaryKey: true
+  },
+  text: {
+    type: Sequelize.STRING
+  },
+  username: {
+    type: Sequelize.STRING
+  }
+});
+
 var UsersTable = sequelize.define('users', {
   id: {
     type: Sequelize.INTEGER,
@@ -122,6 +157,8 @@ var UsersTableEventTable = sequelize.define('UsersTableEventTable', {
 ItemListTable.belongsTo(EventTable);
 ReminderTable.belongsTo(EventTable);
 LocationTable.belongsTo(EventTable);
+Bulletin.belongsTo(EventTable);
+BulletinComment.belongsTo(Bulletin);
 EventTable.hasOne(LocationTable);
 UsersTable.belongsToMany(EventTable, {through: 'UsersTableEventTable'});
 EventTable.belongsToMany(UsersTable, {through: 'UsersTableEventTable'});
@@ -147,3 +184,5 @@ module.exports.ReminderTable = ReminderTable;
 module.exports.UsersTable = UsersTable;
 module.exports.LocationTable = LocationTable;
 module.exports.UsersTableEventTable = UsersTableEventTable;
+module.exports.Bulletin = Bulletin;
+module.exports.BulletinComment = BulletinComment;

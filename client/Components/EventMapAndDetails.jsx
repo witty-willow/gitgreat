@@ -9,7 +9,7 @@ class EventMapAndDetails extends React.Component {
   }
   render() {
     return (
-      <Grid>
+      <Grid className="eventInfo">
         <Row>
           <Col xs={6}>
             <EventDetails featuredEvent={this.props.featuredEvent}/>
