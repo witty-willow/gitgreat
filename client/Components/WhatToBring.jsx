@@ -1,7 +1,7 @@
 import React from 'react';
 import helpers from './WhatToBringHelpers.jsx';
 import Promise from 'bluebird';
-import {Button, Table, Form} from 'react-bootstrap';
+import {Grid, Row, Col, Table, Form, Button} from 'react-bootstrap';
 
 //Child component within the Event Planning component
 //Allows users to create a list of items that need to be brought to an event;
@@ -137,31 +137,40 @@ class WhatToBring extends React.Component {
 
 
     return (
-      <div id="whatToBring">
-        <Form className="bringForm" onSubmit={this.handleSubmit}>
-          <label>
-            Owner:
-          <input type='text' name='owner'
-            onChange={this.handleOwnerChange}
-          />
-          </label>
-          <label>
-            Item:
-            <input type='text' name='item'
-              onChange={this.handleItemChange}
-            />
-          </label>
-          <label>
-            Cost:
-            <input type='text' name='cost'
-              onChange={this.handleCostChange}
-            />
-          </label>
-          <Button type="submit" value="Submit">
-            Submit
-          </Button>
-        </Form>
-        <br/>
+      <Grid id="whatToBring">
+        <Row>
+          <Form className="bringForm" onSubmit={this.handleSubmit}>
+            <Col xs={3} xsOffset={1}>
+              <label>
+                Owner:
+              <input type='text' name='owner'
+                onChange={this.handleOwnerChange}
+              />
+              </label>
+            </Col>
+            <Col xs={3}>
+              <label>
+                Item:
+                <input type='text' name='item'
+                  onChange={this.handleItemChange}
+                />
+              </label>
+            </Col>
+            <Col xs={3}>
+              <label>
+                Cost:
+                <input type='text' name='cost'
+                  onChange={this.handleCostChange}
+                />
+              </label>
+            </Col>
+            <Col xs={1}>
+              <Button type="submit" value="Submit" className="bringBtn">
+                Submit
+              </Button>
+            </Col>
+          </Form>
+        </Row>
         <Table striped bordered condensed hover>
           <thead>
             <tr>
@@ -196,7 +205,7 @@ class WhatToBring extends React.Component {
             )}
           </tbody>
         </Table>
-      </div>
+      </Grid>
     );
   }
 }
