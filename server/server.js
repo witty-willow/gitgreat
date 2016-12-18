@@ -144,11 +144,18 @@ app.get('/eventTable', function(req, res, next) {
 
 app.delete('/eventTable', function(req, res, next) {
   var eventName = url.parse(req.url).query.slice(5).split('_').join(' ');
-  dbModels.EventTable.destroy({where: {name: eventName}})
+  dbModels.EventTable.findOne({where: {name: eventName}})
     .then(function(event) {
-      console.log('deleted');
-      res.sendStatus(200);
-    });
+      var eventId = event.dataValues.id;
+      dbModels.Bulletin.destroy({where: {eventId: eventId}})
+      .then(function() {
+        dbModels.EventTable.destroy({where: {name: eventName}})
+          .then(function(event) {
+            console.log('deleted');
+            res.sendStatus(200);
+          });
+      }) 
+    })
   console.log(eventName);
 });
 
