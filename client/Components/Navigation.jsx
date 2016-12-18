@@ -9,7 +9,7 @@ import {LinkContainer} from 'react-router-bootstrap';
 //MIGHT NEED TO ACCESS USER STATE IN COMPONENTS
 
 var Navigation = ({handleCreateClick}) => (
-  <Navbar>
+  <Navbar className="main-nav">
     <Navbar.Header>
       <Navbar.Brand>
         <Link to={'/'} className='title'>Friends</Link>
@@ -23,14 +23,14 @@ var Navigation = ({handleCreateClick}) => (
       <LinkContainer to={{pathname: '/create'}}>
         <NavItem eventKey={2}>Create Event</NavItem>
       </LinkContainer>
-
-      <NotAuthenticated>
-        <LoginLink>Login</LoginLink>
-      </NotAuthenticated>
-      <Authenticated>
-        <LogoutLink>Logout</LogoutLink>
-      </Authenticated>
-
+      <li>
+        <NotAuthenticated>
+          <LoginLink>Login</LoginLink>
+        </NotAuthenticated>
+        <Authenticated>
+          <LogoutLink>Logout</LogoutLink>
+        </Authenticated>
+      </li>
       <LinkContainer to={{pathname: '/register'}}>
         <NavItem eventKey={3}>Register</NavItem>
       </LinkContainer>

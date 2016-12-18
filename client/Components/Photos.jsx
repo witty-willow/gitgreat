@@ -6,7 +6,12 @@ class Photos extends React.Component {
     this.state = {
       photoUrls: []
     }
+
   }
+  componentWillMount() {
+    this.displayPhotos();
+  }
+
   displayPhotos() {
     // // ajax get request from server with correct route
     //     // remember to make a new route
@@ -18,69 +23,35 @@ class Photos extends React.Component {
       this.setState({
         photoUrls: photoLinks
       });
-      // console.log(photoUrls);
-    //   console.log('tessstt:'); //not showing up
-    //   this.render();
     }.bind(this));
   }
   uploadFile(e) {
     e.preventDefault();
     var formData = new FormData();
-    // var files = document.getElementById('imageUpload').files;
     var files = $('input[type=file]')[0].files[0];
 
-    // formData.append('name', files[0].name);
     formData.append('imageFile', files);
-    // formData.append('username', 'wells');
-    // for(var pair of formData.entries()) {
-    //   console.log(pair);
-    // }
     $.ajax({
       url: '/uploadImage',
       type: 'POST',
       data: formData,
       processData: false, // tells jQuery not to process data
       contentType: false, // tells jQuery not to set contentType
-      success: () => {
-        console.log('post request successful and saved to db!');
+      success: setTimeout(function() {
         this.displayPhotos();
-      }
+        console.log('wait');
+      }.bind(this), 2000)
     });
-    // console.log('files here: ', files);
-    // for(var i = 0; i < files.length; i++) {
-    //   // var fileObject = {};
-    //   // fileObject.filename = files[i].name;
-    //   // fileObject.filesize = files[i].size;
-    //   // fileObject.filetype = files[i].type;
-    //   console.log(files[i]);
-    //   var reader = new FileReader();
-    //   reader.onload = (e) => {
-    //     console.log('successfully loaded file!!!');
-    //     // console.log('fileobject: ', fileObject);
-    //     console.log('event: ', e);
-    //     // fileObject.filedata = e.target.result;
-    //     $.ajax({
-    //       type: 'POST',
-    //       url: '/uploadImage',
-    //       data: JSON.stringify(e.target.result),
-    //       success: () => {
-    //         console.log('post request successful and saved to db!');
-    //         this.displayPhotos();
-    //       }
-    //     });
-    //   }
-    //   reader.readAsDataURL(files[i]);
-    // }
   }
   render() {
-    // this.displayPhotos();
+    
     return (
       <div>Photos Tab Stuff Here
         <form method="post" encType="multipart/form-data" id="uploadForm">
           <input type="file" id="imageUpload" accept="image/*" multiple /><br/>
           <input type="submit" value="submit" onClick={(e) => this.uploadFile(e)}/>
         </form>
-        {this.state.photoUrls.map(link => <img src={link} />)}
+        {this.state.photoUrls.map(link => <img className="photos" src={link} />)}
       </div>);
   }
 }

@@ -6,7 +6,6 @@
 
 body {
   font-family: lucida grande;
-  margin-top: 130px;
   color: #404040;
   background-color: #f2f2f2;
 
@@ -17,6 +16,51 @@ label {
 }
 
 
+.main-nav.navbar {
+  position: relative;
+  min-height: 80px;
+  border-bottom: 2px solid #e6e6e6;
+  background: white;
+  margin-bottom: 0;
+}
+
+.main-nav.navbar .container {
+  padding-top: 35px;
+  max-width: 575px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.sub-nav.navbar {
+  background: white;
+  border-bottom: 2px solid #e6e6e6;
+}
+
+.sub-nav.navbar .container{
+  max-width: 500px;
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
+    background-color: white;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: black;
+}
+
+.navbar-default .navbar-brand, .navbar-default .navbar-brand:hover {
+    color: black;
+}
+
+.navbar-default .navbar-brand {
+  font-size: 3em;
+  letter-spacing: 3px;
+  padding-bottom: 40px;
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
+    color: black;
+}
 
 /* * * * * * * * * *
  *                 *
@@ -39,11 +83,21 @@ label {
   border-radius: 5px;
   padding: 15px;
   margin: 10px;
+  position: relative;
 }
 
-.deleteBtn {
-  float: right;
-  margin-bottom: 5px;
+.trash {
+  position: absolute;
+  right: 15px;
+  top: 36%;
+}
+
+.trash:hover {
+  cursor: pointer;
+}
+
+.fa-trash-o {
+  font-size: 1.7em;
 }
 
 
@@ -112,6 +166,12 @@ label {
 #whatToBring {
   width: 65%;
   margin: 0 auto;
+}
+
+.photos {
+  width: 50%;
+  height: 50%;
+  margin: 20px;
 }
 /*table {
   font-family: arial, sans-serif;
