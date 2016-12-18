@@ -15,6 +15,9 @@ label {
   padding: 10px;
 }
 
+#upcoming, #createEvent {
+  margin-top: 20px;
+}
 
 .main-nav.navbar {
   position: relative;
