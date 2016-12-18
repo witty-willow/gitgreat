@@ -28,13 +28,10 @@ class Photos extends React.Component {
     var formData = new FormData();
     // var files = document.getElementById('imageUpload').files;
     var files = $('input[type=file]')[0].files[0];
-    console.log(files);
-    console.log('files: ', files);
+
     // formData.append('name', files[0].name);
     formData.append('imageFile', files);
     // formData.append('username', 'wells');
-    console.log('files[0]:, ', files);
-    console.log('formData: ', formData.entries());
     // for(var pair of formData.entries()) {
     //   console.log(pair);
     // }
@@ -76,7 +73,7 @@ class Photos extends React.Component {
     // }
   }
   render() {
-    this.displayPhotos();
+    // this.displayPhotos();
     return (
       <div>Photos Tab Stuff Here
         <form method="post" encType="multipart/form-data" id="uploadForm">

@@ -20,6 +20,7 @@ cloudinary.config({
 
 const app = express();
 app.use(parser.json());
+var jsonParser = parser.json();
 
 //serve public folder static files
 app.use(express.static(path.join(__dirname, '..', '/public')));
@@ -59,7 +60,7 @@ app.post('/eventTable', function(req, res, next) {
           eventId: event.dataValues.id
         })
         .then(function () {
-          console.log('OMG WE DID IT!!!!!!!')
+          console.log('event posted');
         })
       })
     })
@@ -88,6 +89,33 @@ app.post('/eventTable', function(req, res, next) {
     .catch(function(err) {
       res.sendStatus(400);
     });
+});
+
+app.post('/bulletin', jsonParser, function(req, res) {
+  console.log(req.body);
+  var eventName = req.body.event.name;
+  dbModels.EventTable.findOne({where: {name: eventName}})
+    .then(function(event) {
+      var eventId = event.id;
+      dbModels.Bulletin.create({
+        text: req.body.message,
+        user: req.body.user,
+        eventId: eventId
+      })
+      .then(function(bulletin) {
+        // res.status(201).send('successfully created: ', bulletin)
+        utils.sendResponse(res, 201, 'application/json', 'posted bulletin successfully');
+      }).catch(function(err) {
+        console.log('Error: ', err)
+      });
+    });
+});
+
+app.get('/bulletinPosts', function(req, res) {
+  dbModels.Bulletin.findAll().then(function(bulletins) {
+    // res.send(200, bulletins);
+    utils.sendResponse(res, 200, 'application/json', bulletins);
+  })
 });
 
 app.get('/eventTable', function(req, res, next) {
@@ -129,8 +157,7 @@ app.post('/itemList', function(req, res, next) {
   dbModels.EventTable.findOne({where: {name: eventName}})
     .then(function(event) {
       var eventId = event.id;
-      dbModels.ItemListTable
-      .create({
+      dbModels.ItemListTable.create({
         item: req.body.item,
         owner: req.body.owner,
         cost: req.body.cost,
